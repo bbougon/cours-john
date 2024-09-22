@@ -39,6 +39,7 @@ export const ArtistsProvider = ({ children }: PropsWithChildren) => {
             ...artistsDTO.items.map((a) => ({
               name: a.snippet.title,
               id: a.id,
+                thumbnail: a.snippet.thumbnails.default.url
             }))
           );
           const prochainePage = artistsDTO.nextPageToken;
@@ -64,6 +65,7 @@ export const ArtistsProvider = ({ children }: PropsWithChildren) => {
         let artists = artistsDTO.items.map((a) => ({
           name: a.snippet.title,
           id: a.id,
+            thumbnail: a.snippet.thumbnails.default.url
         }));
         const prochainePage = artistsDTO.nextPageToken;
         if (prochainePage) {
