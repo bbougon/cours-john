@@ -12,6 +12,7 @@ type GuitarClassProperties = {
 
 const GuitarClassElement = (properties: GuitarClassProperties) => {
   const [classVideos, setClassVideos] = useState<ReactElement>(<></>);
+    const [videoPlayer, setVideoPlayer] = useState<ReactElement>(<></>)
 
   const showVideos = useCallback(() => {
     setClassVideos(
@@ -19,20 +20,21 @@ const GuitarClassElement = (properties: GuitarClassProperties) => {
         videos={properties.guitarClass.videos}
         guitarClassTitle={properties.guitarClass.title}
         open={true}
-        onClose={() => setClassVideos(<></>)}
+        onClick={(player) => setVideoPlayer(<div dangerouslySetInnerHTML={{__html: player}}></div>)}
       />
     );
   }, []);
   return (
-    <li className="justify-between gap-x-6 py-5 hover:bg-slate-100 cursor-pointer pl-2 grid grid-cols-4 gap-1" onClick={showVideos}>
+    <li className="justify-between gap-x-6 py-5 hover:bg-slate-100 cursor-pointer pl-2 grid lg:grid-cols-4 gap-1" onClick={showVideos}>
       <div className="flex min-w-0 gap-x-4">
         <div className="min-w-0 flex-auto">
             <h2 className="font-semibold">
                 {properties.guitarClass.title}
             </h2>
         </div>
-        {classVideos}
       </div>
+      <div>{classVideos}</div>
+      <div className="lg:col-end-5 lg:col-span-2">{videoPlayer}</div>
     </li>
   );
 };
@@ -47,7 +49,10 @@ export const ClassesStack = (
     />
   ));
   return (
-    <ul role="list" className="divide-y divide-gray-100 transition delay-300 duration-300">
+    <ul
+      role="list"
+      className="divide-y divide-gray-100 transition delay-300 duration-300"
+    >
       {classes}
     </ul>
   );

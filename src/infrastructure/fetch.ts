@@ -25,6 +25,11 @@ class ParametersAPIBuilder<CORPS = void> {
     return this;
   }
 
+  video(videoId: string, smallScreen?: boolean): ParametersAPIBuilder<CORPS> {
+    this._url = `${this.youtubeURL}videos?key=${import.meta.env['VITE_YOUTUBE_API_KEY']}&part=player${smallScreen ? '&maxWidth=290' : ''}&id=${videoId}`;
+    return this;
+  }
+
   method(method: string): ParametersAPIBuilder<CORPS> {
     this._method = method;
     return this;
