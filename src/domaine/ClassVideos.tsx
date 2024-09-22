@@ -1,6 +1,7 @@
 import { Video } from './classes.ts';
-import {PropsWithChildren, useCallback, useEffect, useState} from 'react';
+import { PropsWithChildren, useCallback, useEffect, useState } from 'react';
 import { execute, parametersAPIBuilder } from '../infrastructure/fetch.ts';
+import {slugify} from "../infrastructure/slugify.ts";
 
 type ClassVideosProperties = {
   videos: Video[];
@@ -11,7 +12,7 @@ type ClassVideosProperties = {
 type VideoProperties = {
   video: Video;
   onClick: (player: string) => void;
-  active: boolean
+  active: boolean;
 };
 type VideoPlayer = {
   embeddedVideo: string;
@@ -48,11 +49,14 @@ const VideoElement = (properties: PropsWithChildren<VideoProperties>) => {
     });
   }, [smallScreen]);
 
-    useEffect(() => {
-        setActiveBackground(properties.active ? "bg-slate-200": "")
-    }, [properties.active]);
+  useEffect(() => {
+    setActiveBackground(properties.active ? 'bg-slate-200' : '');
+  }, [properties.active]);
   return (
-    <li className={`flex justify-between gap-x-6 py-5 pl-2 hover:bg-slate-200 ${activeBackground}`} onClick={displayVideo}>
+    <li
+      className={`flex justify-between gap-x-6 py-5 pl-2 hover:bg-slate-200 ${activeBackground}`}
+      onClick={displayVideo}
+    >
       <div className="flex min-w-0 gap-x-4">
         <div className="min-w-0 flex-auto">{properties.video.title}</div>
       </div>
@@ -60,8 +64,7 @@ const VideoElement = (properties: PropsWithChildren<VideoProperties>) => {
   );
 };
 export const ClassVideos = (properties: ClassVideosProperties) => {
-    const [currentActiveVideo, setCurrentActiveVideo] = useState("")
-
+  const [currentActiveVideo, setCurrentActiveVideo] = useState('');
   return (
     <>
       <div className="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
@@ -70,13 +73,15 @@ export const ClassVideos = (properties: ClassVideosProperties) => {
             <ul role="list" className="divide-y divide-gray-100">
               {properties.videos.map((video) => (
                 <VideoElement
-                  key={video.title.toLowerCase().replace(' ', '-')}
+                  key={slugify(video.title)}
                   video={video}
                   onClick={(player) => {
-                    setCurrentActiveVideo(video.title.toLowerCase().replace(" ", "-"))
+                    setCurrentActiveVideo(
+                      slugify(video.title)
+                    );
                     properties.onClick(player);
                   }}
-                  active={currentActiveVideo === video.title.toLowerCase().replace(" ", "-")}
+                  active={currentActiveVideo === slugify(video.title)}
                 />
               ))}
             </ul>

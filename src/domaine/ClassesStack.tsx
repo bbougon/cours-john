@@ -1,6 +1,7 @@
 import { GuitarClass } from './classes.ts';
 import { PropsWithChildren, ReactElement, useCallback, useState } from 'react';
 import { ClassVideos } from './ClassVideos.tsx';
+import {slugify} from "../infrastructure/slugify.ts";
 
 type ClassStackProperties = {
   classes: GuitarClass[];
@@ -44,7 +45,7 @@ export const ClassesStack = (
 ) => {
   const classes = properties.classes.map((guitarClass) => (
     <GuitarClassElement
-      key={guitarClass.title.toLowerCase().replace(' ', '-')}
+      key={slugify(guitarClass.title)}
       guitarClass={guitarClass}
     />
   ));
