@@ -1,5 +1,7 @@
-import {GuitarClass, VideoDTO} from '../src/domaine/classes';
+import { GuitarClass, VideoDTO } from '../src/domaine/classes';
 import { fakerFR } from '@faker-js/faker';
+
+import {Artist} from "../src/domaine/Artist";
 
 interface Builder<T> {
   build(): T;
@@ -25,18 +27,40 @@ class VideoDTOBuilder implements Builder<VideoDTO> {
 }
 
 class GuitarClassesBuilder implements Builder<GuitarClass[]> {
-    private guitarClasses: GuitarClass[] = []
-    createClasses(numberOfClasses: number): GuitarClassesBuilder {
-        for (let i = 0; i < numberOfClasses; i++) {
-            this.guitarClasses.push({title: fakerFR.music.songName(), videos: []})
-        }
-        return this
-    }
+  private guitarClasses: GuitarClass[] = [];
 
-    build(): GuitarClass[] {
-        return this.guitarClasses;
+  createClasses(numberOfClasses: number): GuitarClassesBuilder {
+    for (let i = 0; i < numberOfClasses; i++) {
+      this.guitarClasses.push({ title: fakerFR.music.songName(), videos: [] });
     }
+    return this;
+  }
+
+  build(): GuitarClass[] {
+    return this.guitarClasses;
+  }
 }
 
 export const aVideoDTOBuilder = () => new VideoDTOBuilder();
 export const aGuitarClassesBuilder = () => new GuitarClassesBuilder();
+
+class ArtistBuilder implements Builder<Artist> {
+  private artistName: string = fakerFR.music.artist();
+  private id: string = fakerFR.string.alpha();
+  private thumbnail: string = fakerFR.string.alpha();
+
+  withName(artistName: string): ArtistBuilder {
+    this.artistName = artistName;
+    return this;
+  }
+
+  build(): Artist {
+    return {
+      name: this.artistName,
+      id: this.id,
+      thumbnail: this.thumbnail,
+    };
+  }
+}
+
+export const anArtistBuilder = () => new ArtistBuilder();

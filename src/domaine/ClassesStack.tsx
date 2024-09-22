@@ -26,7 +26,7 @@ const GuitarClassElement = (properties: GuitarClassProperties) => {
     );
   }, []);
   return (
-    <li className="justify-between gap-x-6 py-5 hover:bg-slate-100 cursor-pointer pl-2 grid lg:grid-cols-4 gap-1" onClick={showVideos}>
+    <li className="justify-between gap-x-6 py-5 hover:bg-slate-100 cursor-pointer pl-2 grid grid-cols-1 lg:grid-cols-4 gap-1" onClick={showVideos}>
       <div className="flex min-w-0 gap-x-4">
         <div className="min-w-0 flex-auto">
             <h2 className="font-semibold">

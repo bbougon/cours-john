@@ -16,7 +16,14 @@ import {
   hideGuitarClasses,
 } from './artistCardReducer.ts';
 import { slugify } from '../infrastructure/slugify.ts';
+import { BulletShortCut } from './BulletShortCut.tsx';
 import { Artist } from './Artist.ts';
+import {
+  artistsFiltered,
+  artistsFilterReset,
+  artistsLoaded,
+  artistsReducer,
+} from './artistsReducer.ts';
 
 type ArtistCardProperties = {
   artist: Artist;
@@ -106,7 +113,7 @@ const ArtistCard = ({ artist }: ArtistCardProperties) => {
             <img
               src={artist.thumbnail}
               alt={artist.name}
-              className="h-10 w-10 rounded-full bg-gray-50"
+              className="h-10 w-10 rounded-full bg-gray-50 "
             />
           </div>
         </div>
@@ -124,18 +131,36 @@ const ArtistCard = ({ artist }: ArtistCardProperties) => {
 };
 
 const Artists = () => {
-  let [artists, setArtists] = useState<Artist[]>([]);
   const artistsProvider = useArtists();
+  const [artistsReducerState, dispatch] = useReducer(artistsReducer, {
+    filteredArtists: () => [],
+    artists: [],
+  });
 
   useEffect(() => {
-    setArtists(artistsProvider.artists());
+    dispatch(artistsLoaded(artistsProvider.artists()));
   }, [artistsProvider]);
 
+  const filterArtists = useCallback((letter?: string) => {
+    if (letter) {
+      dispatch(artistsFiltered(letter));
+    } else {
+      dispatch(artistsFilterReset());
+    }
+  }, []);
   return (
-    <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-      {artists.map((artist) => (
-        <ArtistCard key={slugify(artist.name)} artist={artist} />
-      ))}
+    <div>
+      <div className="pt-10">
+        <BulletShortCut
+          onClick={(letter) => filterArtists(letter)}
+          artists={artistsReducerState.artists}
+        />
+      </div>
+      <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+        {artistsReducerState.filteredArtists().map((artist) => (
+          <ArtistCard key={slugify(artist.name)} artist={artist} />
+        ))}
+      </div>
     </div>
   );
 };
