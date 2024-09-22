@@ -47,7 +47,7 @@ export const ClassesStack = (
     />
   ));
   return (
-    <ul role="list" className="divide-y divide-gray-100">
+    <ul role="list" className="divide-y divide-gray-100 transition delay-300 duration-300">
       {classes}
     </ul>
   );
