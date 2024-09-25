@@ -1,7 +1,7 @@
 import { GuitarClass } from './classes.ts';
 import { PropsWithChildren, ReactElement, useCallback, useState } from 'react';
 import { ClassVideos } from './ClassVideos.tsx';
-import {slugify} from "../infrastructure/slugify.ts";
+import { slugify } from '../infrastructure/slugify.ts';
 
 type ClassStackProperties = {
   classes: GuitarClass[];
@@ -13,7 +13,7 @@ type GuitarClassProperties = {
 
 const GuitarClassElement = (properties: GuitarClassProperties) => {
   const [classVideos, setClassVideos] = useState<ReactElement>(<></>);
-    const [videoPlayer, setVideoPlayer] = useState<ReactElement>(<></>)
+  const [videoPlayer, setVideoPlayer] = useState<ReactElement>(<></>);
 
   const showVideos = useCallback(() => {
     setClassVideos(
@@ -21,21 +21,26 @@ const GuitarClassElement = (properties: GuitarClassProperties) => {
         videos={properties.guitarClass.videos}
         guitarClassTitle={properties.guitarClass.title}
         open={true}
-        onClick={(player) => setVideoPlayer(<div dangerouslySetInnerHTML={{__html: player}}></div>)}
+        onClick={(player) =>
+          setVideoPlayer(
+            <div dangerouslySetInnerHTML={{ __html: player }}></div>
+          )
+        }
       />
     );
   }, []);
   return (
-    <li className="justify-between gap-x-6 py-5 hover:bg-slate-100 cursor-pointer pl-2 grid grid-cols-1 lg:grid-cols-4 gap-1" onClick={showVideos}>
+    <li
+      className="grid cursor-pointer grid-cols-1 justify-between gap-1 gap-x-6 py-5 pl-2 hover:bg-slate-100 lg:grid-cols-4"
+      onClick={showVideos}
+    >
       <div className="flex min-w-0 gap-x-4">
         <div className="min-w-0 flex-auto">
-            <h2 className="font-semibold">
-                {properties.guitarClass.title}
-            </h2>
+          <h2 className="font-semibold">{properties.guitarClass.title}</h2>
         </div>
       </div>
       <div>{classVideos}</div>
-      <div className="lg:col-end-5 lg:col-span-2">{videoPlayer}</div>
+      <div className="lg:col-span-2 lg:col-end-5">{videoPlayer}</div>
     </li>
   );
 };

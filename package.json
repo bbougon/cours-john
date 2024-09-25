@@ -8,7 +8,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "tsc --noEmit && vitest"
+    "test": "tsc --noEmit && vitest",
+    "format:check": "npx prettier --config=./.prettierrc.json -c .",
+    "format:fix": "npx prettier --config=./.prettierrc.json ."
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -30,6 +32,7 @@
     "globals": "^15.9.0",
     "postcss": "^8.4.47",
     "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.6",
     "tailwindcss": "^3.4.12",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
