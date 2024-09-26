@@ -63,7 +63,7 @@ export const ArtistsProvider = ({ children }: PropsWithChildren) => {
       fetch,
       async (reponse) => {
         const artistsDTO = await reponse;
-        let artists = artistsDTO.items.map((a) => ({
+        const artists = artistsDTO.items.map((a) => ({
           name: a.snippet.title,
           id: a.id,
             thumbnail: a.snippet.thumbnails.default.url
