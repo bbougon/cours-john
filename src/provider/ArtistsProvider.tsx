@@ -9,8 +9,8 @@ import {
   parametersAPIBuilder,
 } from '../infrastructure/fetch.ts';
 import { ArtistAPIResponse } from '../infrastructure/dtos.ts';
+import {Artist} from "../domaine/class/Artist.ts";
 
-import {Artist} from "../domaine/Artist.ts";
 
 type ArtistsProviderType = {
   artists: () => Artist[];

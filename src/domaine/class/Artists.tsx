@@ -5,17 +5,13 @@ import {
   useReducer,
   useState,
 } from 'react';
-import { execute, parametersAPIBuilder } from '../infrastructure/fetch.ts';
 import { generateGuitarClasses, GuitarClass } from './classes.ts';
-import { VideoAPIResponse } from '../infrastructure/dtos.ts';
-import { useArtists } from '../hooks/hooks.ts';
 import { ClassesStack } from './ClassesStack.tsx';
 import {
   artistCardReducer,
   displayGuitarClasses,
   hideGuitarClasses,
 } from './artistCardReducer.ts';
-import { slugify } from '../infrastructure/slugify.ts';
 import { BulletShortCut } from './BulletShortCut.tsx';
 import { Artist } from './Artist.ts';
 import {
@@ -24,6 +20,10 @@ import {
   artistsLoaded,
   artistsReducer,
 } from './artistsReducer.ts';
+import {execute, parametersAPIBuilder} from "../../infrastructure/fetch.ts";
+import {VideoAPIResponse} from "../../infrastructure/dtos.ts";
+import {useArtists} from "../../hooks/hooks.ts";
+import {slugify} from "../../infrastructure/slugify.ts";
 
 type ArtistCardProperties = {
   artist: Artist;

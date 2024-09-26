@@ -1,7 +1,7 @@
-import { GuitarClass, VideoDTO } from '../src/domaine/classes';
 import { fakerFR } from '@faker-js/faker';
-
-import {Artist} from "../src/domaine/Artist";
+import {GuitarClass, Video, VideoDTO} from "../src/domaine/class/classes";
+import {Artist} from "../src/domaine/class/Artist";
+import {Bookmark} from "../src/domaine/bookmark/Bookmark";
 
 interface Builder<T> {
   build(): T;
@@ -41,9 +41,6 @@ class GuitarClassesBuilder implements Builder<GuitarClass[]> {
   }
 }
 
-export const aVideoDTOBuilder = () => new VideoDTOBuilder();
-export const aGuitarClassesBuilder = () => new GuitarClassesBuilder();
-
 class ArtistBuilder implements Builder<Artist> {
   private artistName: string = fakerFR.music.artist();
   private id: string = fakerFR.string.alpha();
@@ -63,4 +60,30 @@ class ArtistBuilder implements Builder<Artist> {
   }
 }
 
+class BookmarkBuilder implements Builder<Bookmark> {
+    private video: Video = aVideoBuilder().build();
+    private classId: string = fakerFR.string.alpha();
+  build(): Bookmark {
+    return {
+        video: this.video,
+        classId: this.classId
+    }
+  }
+}
+
+class VideoBuilder implements Builder<Video> {
+    private id: string = fakerFR.string.alpha();
+    private title: string = fakerFR.music.songName();
+  build(): Video {
+    return {
+        id: this.id,
+        title: this.title
+    }
+  }
+}
+
+const aVideoBuilder = () => new VideoBuilder();
+export const aVideoDTOBuilder = () => new VideoDTOBuilder();
+export const aGuitarClassesBuilder = () => new GuitarClassesBuilder();
 export const anArtistBuilder = () => new ArtistBuilder();
+export const aBookmarkBuilder = () => new BookmarkBuilder();

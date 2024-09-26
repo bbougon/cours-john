@@ -1,8 +1,12 @@
 import {describe, expect, it} from 'vitest';
-import { anArtistBuilder } from '../builders';
-import {artistsFiltered, artistsFilterReset, artistsLoaded, artistsReducer} from "../../src/domaine/artistsReducer";
-
-import {Artist} from "../../src/domaine/Artist";
+import {anArtistBuilder} from "../../builders";
+import {
+    artistsFiltered,
+    artistsFilterReset,
+    artistsLoaded,
+    artistsReducer
+} from "../../../src/domaine/class/artistsReducer";
+import {Artist} from "../../../src/domaine/class/Artist";
 
 describe('Artists reducer', () => {
   it('Loads artists', () => {
@@ -65,4 +69,5 @@ describe('Artists reducer', () => {
         ])
         expect(artistsState.filteredArtists()).toStrictEqual<Artist[]>([johnColtrane, bobDylan])
     })
+
 });

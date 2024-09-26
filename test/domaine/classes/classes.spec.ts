@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { acdcSongs, expectedACDCClasses } from './acdc';
-import { generateGuitarClasses, GuitarClass } from '../../src/domaine/classes';
-import { aVideoDTOBuilder } from '../builders';
 import { ericClaptonSongs, expectedEriClaptonClasses } from './eric';
+import {aVideoDTOBuilder} from "../../builders";
+import {generateGuitarClasses, GuitarClass} from "../../../src/domaine/class/classes";
 
 describe('Generate guitar classes', () => {
   it('For one song', () => {

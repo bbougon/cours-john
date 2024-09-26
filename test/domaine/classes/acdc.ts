@@ -1,4 +1,4 @@
-import { GuitarClass, VideoDTO } from '../../src/domaine/classes';
+import {GuitarClass, VideoDTO} from "../../../src/domaine/class/classes";
 
 export const expectedACDCClasses: GuitarClass[] = [
   {

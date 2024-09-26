@@ -1,7 +1,8 @@
-import { GuitarClass } from './classes.ts';
+import {GuitarClass, Video} from './classes.ts';
 import { PropsWithChildren, ReactElement, useCallback, useState } from 'react';
 import { ClassVideos } from './ClassVideos.tsx';
-import { slugify } from '../infrastructure/slugify.ts';
+import {useBookmark} from "../../hooks/hooks.ts";
+import {slugify} from "../../infrastructure/slugify.ts";
 
 type ClassStackProperties = {
   classes: GuitarClass[];
@@ -14,6 +15,15 @@ type GuitarClassProperties = {
 const GuitarClassElement = (properties: GuitarClassProperties) => {
   const [classVideos, setClassVideos] = useState<ReactElement>(<></>);
   const [videoPlayer, setVideoPlayer] = useState<ReactElement>(<></>);
+  const bookmark = useBookmark();
+
+    const onBookmarkClick = useCallback((video: Video) => {
+        if(bookmark.isVideoBookmarked(video)) {
+            bookmark.remove({classId: properties.guitarClass.title, video})
+        } else {
+            bookmark.add({classId: properties.guitarClass.title, video})
+        }
+    }, []);
 
   const showVideos = useCallback(() => {
     setClassVideos(
@@ -21,11 +31,12 @@ const GuitarClassElement = (properties: GuitarClassProperties) => {
         videos={properties.guitarClass.videos}
         guitarClassTitle={properties.guitarClass.title}
         open={true}
-        onClick={(player) =>
+        onVideoTitleClick={(player) =>
           setVideoPlayer(
             <div dangerouslySetInnerHTML={{ __html: player }}></div>
           )
         }
+        onBookmarkClick={(video) => onBookmarkClick(video)}
       />
     );
   }, []);

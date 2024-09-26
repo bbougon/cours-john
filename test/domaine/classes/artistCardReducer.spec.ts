@@ -1,6 +1,6 @@
 import {describe, expect, it} from 'vitest';
-import {artistCardReducer, displayGuitarClasses, hideGuitarClasses} from "../../src/domaine/artistCardReducer";
-import {aGuitarClassesBuilder} from "../builders";
+import {aGuitarClassesBuilder} from "../../builders";
+import {artistCardReducer, displayGuitarClasses, hideGuitarClasses} from "../../../src/domaine/class/artistCardReducer";
 
 describe('ArtistCard reducer', () => {
 
