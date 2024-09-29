@@ -63,23 +63,25 @@ class ArtistBuilder implements Builder<Artist> {
 
 class BookmarkBuilder implements Builder<Bookmark> {
     private video: Video = aVideoBuilder().build();
-    private classId: string = fakerFR.string.alpha();
+    private className: string = fakerFR.music.artist();
+    private classId: string =fakerFR.string.alpha();
   build(): Bookmark {
     return {
         video: this.video,
+        className: this.className,
         classId: this.classId
     }
   }
 }
 
 class VideoBuilder implements Builder<Video> {
-    private id: string = fakerFR.string.alpha();
-    private title: string = fakerFR.music.songName();
+  private id: string = fakerFR.string.alpha();
+  private title: string = `${fakerFR.string.alpha()} - ${fakerFR.music.songName()}`;
   build(): Video {
     return {
-        id: this.id,
-        title: this.title
-    }
+      id: this.id,
+      title: this.title,
+    };
   }
 }
 

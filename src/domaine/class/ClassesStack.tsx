@@ -19,9 +19,9 @@ const GuitarClassElement = (properties: GuitarClassProperties) => {
 
     const onBookmarkClick = useCallback((video: Video) => {
         if(bookmark.isVideoBookmarked(video)) {
-            bookmark.remove({classId: properties.guitarClass.title, video})
+            bookmark.remove({className: properties.guitarClass.title, classId: properties.guitarClass.classId, video})
         } else {
-            bookmark.add({classId: properties.guitarClass.title, video})
+            bookmark.add({className: properties.guitarClass.title, classId: properties.guitarClass.classId, video})
         }
     }, []);
 

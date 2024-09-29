@@ -2,6 +2,7 @@ import {Video} from "../class/classes.ts";
 import {StorageRepository} from "../storageRepository.ts";
 
 export type Bookmark = {
+  className: string;
   classId: string;
   video: Video;
 };
