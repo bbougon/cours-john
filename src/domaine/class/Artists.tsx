@@ -152,6 +152,11 @@ const Artists = () => {
   }, []);
   return (
     <div>
+      <div>
+        <p className="mt-2 text-lg leading-8 text-gray-600">
+          # artists: {artistsProvider.artists().length}
+        </p>
+      </div>
       <div className="pt-10">
         <BulletShortCut
           onClick={(letter) => filterArtists(letter)}
