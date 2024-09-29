@@ -1,8 +1,9 @@
 import { Video } from './classes.ts';
 import { PropsWithChildren, useCallback, useEffect, useState } from 'react';
-import {useBookmark} from "../../hooks/hooks.ts";
-import {execute, parametersAPIBuilder} from "../../infrastructure/fetch.ts";
-import {slugify} from "../../infrastructure/slugify.ts";
+import { useBookmarks } from '../../hooks/hooks.ts';
+import { execute, parametersAPIBuilder } from '../../infrastructure/fetch.ts';
+import { slugify } from '../../infrastructure/slugify.ts';
+import { VideoPlayer, VideoPlayerAPIResponse } from './VideoPlayer';
 
 type ClassVideosProperties = {
   videos: Video[];
@@ -17,19 +18,13 @@ type VideoProperties = {
   onBookmarkClick: (video: Video) => void;
   active: boolean;
 };
-type VideoPlayer = {
-  embeddedVideo: string;
-};
-type VideoPlayerAPIResponse = {
-  items: { player: { embedHtml: string } }[];
-};
 
 const VideoElement = (properties: PropsWithChildren<VideoProperties>) => {
   const [activeBackground, setActiveBackground] = useState<'' | 'bg-slate-200'>(
     ''
   );
   const [smallScreen, setSmallScreen] = useState(false);
-  const bookmark = useBookmark();
+  const bookmark = useBookmarks();
 
   useEffect(() => {
     setSmallScreen(window.matchMedia('(max-width: 639px)').matches);
@@ -75,7 +70,7 @@ const VideoElement = (properties: PropsWithChildren<VideoProperties>) => {
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
-              className={`h-4 w-4 ${bookmark.isVideoBookmarked(properties.video) ? 'fill-amber-200 stroke-amber-400 hover:stroke-slate-400 hover:fill-slate-200' : 'stroke-slate-400 hover:fill-amber-200 hover:stroke-amber-400'}`}
+              className={`h-4 w-4 ${bookmark.isVideoBookmarked(properties.video) ? 'fill-amber-200 stroke-amber-400 hover:fill-slate-200 hover:stroke-slate-400' : 'stroke-slate-400 hover:fill-amber-200 hover:stroke-amber-400'}`}
             >
               <path
                 strokeLinecap="round"

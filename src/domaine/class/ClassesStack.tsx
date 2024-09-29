@@ -1,8 +1,8 @@
-import {GuitarClass, Video} from './classes.ts';
+import { GuitarClass, Video } from './classes.ts';
 import { PropsWithChildren, ReactElement, useCallback, useState } from 'react';
 import { ClassVideos } from './ClassVideos.tsx';
-import {useBookmark} from "../../hooks/hooks.ts";
-import {slugify} from "../../infrastructure/slugify.ts";
+import { useBookmarks } from '../../hooks/hooks.ts';
+import { slugify } from '../../infrastructure/slugify.ts';
 
 type ClassStackProperties = {
   classes: GuitarClass[];
@@ -15,15 +15,23 @@ type GuitarClassProperties = {
 const GuitarClassElement = (properties: GuitarClassProperties) => {
   const [classVideos, setClassVideos] = useState<ReactElement>(<></>);
   const [videoPlayer, setVideoPlayer] = useState<ReactElement>(<></>);
-  const bookmark = useBookmark();
+  const bookmark = useBookmarks();
 
-    const onBookmarkClick = useCallback((video: Video) => {
-        if(bookmark.isVideoBookmarked(video)) {
-            bookmark.remove({className: properties.guitarClass.title, classId: properties.guitarClass.classId, video})
-        } else {
-            bookmark.add({className: properties.guitarClass.title, classId: properties.guitarClass.classId, video})
-        }
-    }, []);
+  const onBookmarkClick = useCallback((video: Video) => {
+    if (bookmark.isVideoBookmarked(video)) {
+      bookmark.remove({
+        className: properties.guitarClass.title,
+        classId: properties.guitarClass.classId,
+        video,
+      });
+    } else {
+      bookmark.add({
+        className: properties.guitarClass.title,
+        classId: properties.guitarClass.classId,
+        video,
+      });
+    }
+  }, []);
 
   const showVideos = useCallback(() => {
     setClassVideos(
