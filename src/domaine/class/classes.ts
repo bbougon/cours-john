@@ -7,11 +7,13 @@ export type VideoDTO = {
   title: string;
   id: string;
   classId: string;
+  image: string
 };
 
 export type Video = {
   title: string;
   id: string;
+  image: string;
 };
 
 const extractTitle = (titre: string) =>

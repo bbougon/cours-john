@@ -11,6 +11,7 @@ class VideoDTOBuilder implements Builder<VideoDTO> {
   private title: string = fakerFR.music.songName();
   private id: string = fakerFR.string.alpha();
   private classId: string = fakerFR.string.alpha();
+  private image: string = fakerFR.internet.url()
 
   havingTitle(titre: string): VideoDTOBuilder {
     this.title = titre;
@@ -23,7 +24,7 @@ class VideoDTOBuilder implements Builder<VideoDTO> {
   }
 
   build(): VideoDTO {
-    return { title: this.title, id: this.id, classId: this.classId };
+    return { title: this.title, id: this.id, classId: this.classId, image: this.image };
   }
 }
 

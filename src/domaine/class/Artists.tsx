@@ -52,6 +52,7 @@ const ArtistCard = ({ artist }: ArtistCardProperties) => {
                 title: i.snippet.title,
                 classId: i.snippet.playlistId,
                 id: i.snippet.resourceId.videoId,
+                image: i.snippet.thumbnails.medium.url,
               }))
             );
           }

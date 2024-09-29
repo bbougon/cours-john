@@ -19,7 +19,7 @@ describe('Generate guitar classes', () => {
       {
         title: 'You only live once',
         classId: videoDTO.classId,
-        videos: [{ title: 'Riff you only live once', id: videoDTO.id }],
+        videos: [{ title: 'Riff you only live once', id: videoDTO.id, image: videoDTO.image }],
       },
     ]);
   });
@@ -36,8 +36,8 @@ describe('Generate guitar classes', () => {
         title: `${videoDTO1.title[0]}${videoDTO1.title.slice(1).toLowerCase()}`,
         classId: videoDTO1.classId,
         videos: [
-          { title: videoDTO1.title, id: videoDTO1.id },
-          { title: videoDTO2.title, id: videoDTO2.id },
+          { title: videoDTO1.title, id: videoDTO1.id, image: videoDTO1.image },
+          { title: videoDTO2.title, id: videoDTO2.id, image: videoDTO2.image },
         ],
       },
     ]);
@@ -52,7 +52,7 @@ describe('Generate guitar classes', () => {
       {
         title: 'My song',
         classId: lickSong.classId,
-        videos: [{ title: lickSong.title, id: lickSong.id }],
+        videos: [{ title: lickSong.title, id: lickSong.id, image: lickSong.image }],
       },
     ]);
   });
