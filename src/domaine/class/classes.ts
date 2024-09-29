@@ -1,18 +1,21 @@
 export type GuitarClass = {
   title: string;
+  classId: string;
   videos: Video[];
 };
 export type VideoDTO = {
   title: string;
   id: string;
+  classId: string;
 };
 
 export type Video = {
-    title: string;
-    id: string;
+  title: string;
+  id: string;
 };
 
-const extractTitle = (titre: string) => titre
+const extractTitle = (titre: string) =>
+  titre
     .replace(/[i|I]ntro/gm, '')
     .replace(/^électrique/gim, '')
     .replace(/(^1ere|^1er|^2ème|^3ème|4ème|5ème) partie/gim, '')
@@ -64,7 +67,6 @@ const extractTitle = (titre: string) => titre
     .trim()
     .toLowerCase();
 export const generateGuitarClasses = (videoDTOS: VideoDTO[]): GuitarClass[] => {
-
   const songsTitle: Map<string, VideoDTO[]> = new Map(
     videoDTOS.map((videos) => [extractTitle(videos.title), []])
   );
@@ -73,9 +75,12 @@ export const generateGuitarClasses = (videoDTOS: VideoDTO[]): GuitarClass[] => {
     songsTitle.get(extractTitle(video.title))?.push(video)
   );
   return Object.entries(Object.fromEntries(songsTitle)).map(
-    ([title, videos]) => ({
-      title: `${title[0].toUpperCase()}${title.slice(1)}`,
-      videos: videos.map(video => ({title: video.title, id: video.id})),
-    })
+    ([title, videos]) => {
+      return {
+        title: `${title[0].toUpperCase()}${title.slice(1)}`,
+        classId: videos[0].classId,
+        videos: videos.map(({classId, ...otherAttributes}) => otherAttributes),
+      };
+    }
   );
 };

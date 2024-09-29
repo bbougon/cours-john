@@ -15,6 +15,6 @@ type APIResponse<T> = {
 };
 export type ArtistAPIResponse = APIResponse<ArtistDTO>;
 export type VideoAPIResponse = APIResponse<{
-  snippet: { title: string; resourceId: { videoId: string } };
+  snippet: { title: string; resourceId: { videoId: string }; playlistId: string };
   id: string;
 }>;

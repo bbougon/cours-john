@@ -8,21 +8,22 @@ interface Builder<T> {
 }
 
 class VideoDTOBuilder implements Builder<VideoDTO> {
-  private titre: string = fakerFR.music.songName();
-  private identifiant: string = fakerFR.string.alpha();
+  private title: string = fakerFR.music.songName();
+  private id: string = fakerFR.string.alpha();
+  private classId: string = fakerFR.string.alpha();
 
   havingTitle(titre: string): VideoDTOBuilder {
-    this.titre = titre;
+    this.title = titre;
     return this;
   }
 
   randomNameFromPrevious(): VideoDTOBuilder {
-    this.titre = `${fakerFR.helpers.arrayElement(['Riff 1', 'riff 1', 'Riff 2', 'Riff partie 1', 'Solo', 'Solo partie 1', 'Rythmique'])} ${this.titre}`;
+    this.title = `${fakerFR.helpers.arrayElement(['Riff 1', 'riff 1', 'Riff 2', 'Riff partie 1', 'Solo', 'Solo partie 1', 'Rythmique'])} ${this.title}`;
     return this;
   }
 
   build(): VideoDTO {
-    return { title: this.titre, id: this.identifiant };
+    return { title: this.title, id: this.id, classId: this.classId };
   }
 }
 
@@ -31,7 +32,7 @@ class GuitarClassesBuilder implements Builder<GuitarClass[]> {
 
   createClasses(numberOfClasses: number): GuitarClassesBuilder {
     for (let i = 0; i < numberOfClasses; i++) {
-      this.guitarClasses.push({ title: fakerFR.music.songName(), videos: [] });
+      this.guitarClasses.push({ title: fakerFR.music.songName(), videos: [], classId: fakerFR.string.alpha() });
     }
     return this;
   }

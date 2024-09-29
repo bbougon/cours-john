@@ -1,8 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { acdcSongs, expectedACDCClasses } from './acdc';
 import { ericClaptonSongs, expectedEriClaptonClasses } from './eric';
-import {aVideoDTOBuilder} from "../../builders";
-import {generateGuitarClasses, GuitarClass} from "../../../src/domaine/class/classes";
+import { aVideoDTOBuilder } from '../../builders';
+import {
+  generateGuitarClasses,
+  GuitarClass,
+} from '../../../src/domaine/class/classes';
 
 describe('Generate guitar classes', () => {
   it('For one song', () => {
@@ -15,6 +18,7 @@ describe('Generate guitar classes', () => {
     expect(guitareClasses).toStrictEqual<GuitarClass[]>([
       {
         title: 'You only live once',
+        classId: videoDTO.classId,
         videos: [{ title: 'Riff you only live once', id: videoDTO.id }],
       },
     ]);
@@ -30,6 +34,7 @@ describe('Generate guitar classes', () => {
     expect(guitareClasses).toStrictEqual<GuitarClass[]>([
       {
         title: `${videoDTO1.title[0]}${videoDTO1.title.slice(1).toLowerCase()}`,
+        classId: videoDTO1.classId,
         videos: [
           { title: videoDTO1.title, id: videoDTO1.id },
           { title: videoDTO2.title, id: videoDTO2.id },
@@ -46,6 +51,7 @@ describe('Generate guitar classes', () => {
     expect(guitareClasses).toStrictEqual<GuitarClass[]>([
       {
         title: 'My song',
+        classId: lickSong.classId,
         videos: [{ title: lickSong.title, id: lickSong.id }],
       },
     ]);
