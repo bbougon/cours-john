@@ -1,5 +1,5 @@
 import { createContext, PropsWithChildren, useCallback, useState } from 'react';
-import { Repositories } from '../domaine/repository.ts';
+import { repositories } from '../domaine/repository.ts';
 import { Bookmark, Video } from '../domaine/bookmark/Bookmark.ts';
 
 type BookmarkProviderType = {
@@ -16,23 +16,26 @@ export const ContextBookmarks = createContext<BookmarkProviderType>(
 
 export const BookmarksProvider = ({ children }: PropsWithChildren) => {
   const [numberOfBookmarks, setNumberOfBookmarks] = useState(0);
-  const add = useCallback((bookmark: Bookmark) => {
-    Repositories.bookmarks().persist(bookmark);
-    setNumberOfBookmarks(numberOfBookmarks + 1);
-  }, [numberOfBookmarks]);
+  const add = useCallback(
+    (bookmark: Bookmark) => {
+      repositories().bookmarks().persist(bookmark);
+      setNumberOfBookmarks(numberOfBookmarks + 1);
+    },
+    [numberOfBookmarks]
+  );
 
   const remove = (bookmark: Bookmark) => {
-    Repositories.bookmarks().delete(bookmark);
+    repositories().bookmarks().delete(bookmark);
   };
 
   const list = useCallback((): Bookmark[] => {
-    const bookmarks = Repositories.bookmarks().getAll().reverse();
+    const bookmarks = repositories().bookmarks().getAll().reverse();
     setNumberOfBookmarks(bookmarks.length);
     return bookmarks;
   }, []);
 
   const isVideoBookmarked = (video: Video) => {
-    return !!Repositories.bookmarks().findByVideoId(video.id);
+    return !!repositories().bookmarks().findByVideoId(video.id);
   };
   return (
     <ContextBookmarks.Provider

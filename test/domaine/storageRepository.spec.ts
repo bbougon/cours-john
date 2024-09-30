@@ -1,9 +1,11 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { aBookmarkBuilder } from '../builders';
-import { Repositories } from '../../src/domaine/repository';
+import {
+  repositories,
+} from '../../src/domaine/repository';
 import { MemoryStorage } from './memoryStorage';
 import { StorageRepository } from '../../src/domaine/storageRepository';
-import {Bookmark} from "../../src/domaine/bookmark/Bookmark";
+import { Bookmark } from '../../src/domaine/bookmark/Bookmark';
 
 describe('Storage repository', () => {
   let memoryStorage = new MemoryStorage();
@@ -135,13 +137,14 @@ describe('Storage repository', () => {
       const bookmark1 = aBookmarkBuilder().build();
       const bookmark2 = aBookmarkBuilder().build();
       const bookmark3 = aBookmarkBuilder().build();
-      Repositories.bookmarks(memoryStorage).persist(bookmark2);
-      Repositories.bookmarks(memoryStorage).persist(bookmark3);
+      const bookmarkRepository = repositories().bookmarks();
+      bookmarkRepository.persist(bookmark2);
+      bookmarkRepository.persist(bookmark3);
 
-      Repositories.bookmarks(memoryStorage).persist(bookmark1);
+      bookmarkRepository.persist(bookmark1);
 
       expect(
-        Repositories.bookmarks(memoryStorage).findByVideoId(bookmark1.video.id)
+        bookmarkRepository.findByVideoId(bookmark1.video.id)
       ).toStrictEqual<Bookmark>(bookmark1);
     });
   });
