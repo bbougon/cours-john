@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "tsc --noEmit && vitest",
+    "test": "tsc --noEmit -p test/tsconfig.test.json && vitest",
+    "test:watch": "tsc --noEmit -p test/tsconfig.test.json && vitest --ui --reporter verbose",
     "format:check": "npx prettier --config=./.prettierrc.json -c .",
     "format:fix": "npx prettier --config=./.prettierrc.json ."
   },
@@ -28,6 +29,7 @@
     "@typescript-eslint/eslint-plugin": "^8.6.0",
     "@typescript-eslint/parser": "^8.6.0",
     "@vitejs/plugin-react": "^4.3.1",
+    "@vitest/ui": "^2.1.1",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.9.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
