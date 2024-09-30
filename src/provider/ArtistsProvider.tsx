@@ -8,8 +8,8 @@ import {
   execute,
   parametersAPIBuilder,
 } from '../infrastructure/fetch.ts';
-import { ArtistAPIResponse } from '../infrastructure/dtos.ts';
 import {Artist} from "../domaine/class/Artist.ts";
+import {ArtistAPIResponse} from "../infrastructure/api";
 
 
 type ArtistsProviderType = {

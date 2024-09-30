@@ -21,9 +21,9 @@ import {
   artistsReducer,
 } from './artistsReducer.ts';
 import { execute, parametersAPIBuilder } from '../../infrastructure/fetch.ts';
-import { VideoAPIResponse } from '../../infrastructure/dtos.ts';
 import { useArtists } from '../../hooks/hooks.ts';
 import { slugify } from '../../infrastructure/slugify.ts';
+import {VideoAPIResponse} from "../../infrastructure/api";
 
 type ArtistCardProperties = {
   artist: Artist;

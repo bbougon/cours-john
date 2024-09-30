@@ -1,5 +1,10 @@
-import {Video} from "../class/classes.ts";
 import {StorageRepository} from "../storageRepository.ts";
+
+export type Video = {
+  title: string;
+  id: string;
+  image: string;
+};
 
 export type Bookmark = {
   className: string;

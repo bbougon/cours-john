@@ -1,5 +1,4 @@
-import { Bookmark } from './Bookmark.ts';
-import { GuitarClass, Video } from '../class/classes.ts';
+import { Bookmark, Video } from './Bookmark.ts';
 
 enum BookmarksVideoActionType {
   LOAD_BOOKMARKS = 'LOAD_BOOKMARKS',
@@ -8,6 +7,12 @@ enum BookmarksVideoActionType {
 type BookmarksVideoAction = {
   type: BookmarksVideoActionType;
   bookmarks: Bookmark[];
+};
+
+type GuitarClass = {
+  title: string;
+  classId: string;
+  videos: Video[];
 };
 
 export type BookmarksVideoState = {
@@ -38,7 +43,7 @@ export const bookmarksVideoReducer = (
             classId: currentClass.classId,
             title: className,
             videos: currentClass.videos,
-          }) as GuitarClass
+          })
       );
       return {
         ...state,

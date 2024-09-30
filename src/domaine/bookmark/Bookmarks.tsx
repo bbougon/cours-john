@@ -4,9 +4,10 @@ import {
   bookmarksVideoReducer,
   loadBookmarks,
 } from './bookmarksVideoReducer.ts';
-import { Video } from '../class/classes';
 import { execute, parametersAPIBuilder } from '../../infrastructure/fetch';
-import {VideoPlayer, VideoPlayerAPIResponse} from "../class/VideoPlayer";
+import {VideoPlayerAPIResponse} from "../../infrastructure/api";
+import { Video } from './Bookmark.ts';
+import { VideoPlayer } from '../VideoPlayer.ts';
 
 type VideoElementProperties = {
   videoSet: Video[];

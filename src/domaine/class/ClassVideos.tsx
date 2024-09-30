@@ -3,7 +3,8 @@ import { PropsWithChildren, useCallback, useEffect, useState } from 'react';
 import { useBookmarks } from '../../hooks/hooks.ts';
 import { execute, parametersAPIBuilder } from '../../infrastructure/fetch.ts';
 import { slugify } from '../../infrastructure/slugify.ts';
-import { VideoPlayer, VideoPlayerAPIResponse } from './VideoPlayer';
+import {VideoPlayerAPIResponse} from "../../infrastructure/api";
+import { VideoPlayer } from '../VideoPlayer.ts';
 
 type ClassVideosProperties = {
   videos: Video[];

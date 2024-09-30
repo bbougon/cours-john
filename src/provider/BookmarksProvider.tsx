@@ -1,7 +1,6 @@
 import { createContext, PropsWithChildren, useCallback, useState } from 'react';
 import { Repositories } from '../domaine/repository.ts';
-import { Bookmark } from '../domaine/bookmark/Bookmark.ts';
-import { Video } from '../domaine/class/classes.ts';
+import { Bookmark, Video } from '../domaine/bookmark/Bookmark.ts';
 
 type BookmarkProviderType = {
   add: (bookmark: Bookmark) => void;
