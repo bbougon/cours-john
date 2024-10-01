@@ -25,6 +25,9 @@ export interface GuitarClassRepository extends Repository<GuitarClass> {
 const extractTitle = (titre: string) =>
   titre
     .replace(/[i|I]ntro/gm, '')
+    .replace(/[b|B]end[ |s]/gm, '')
+    .replace(/[a|A]rpège[ |s]/gm, '')
+    .replace(/[v|V]ibrato/gm, '')
     .replace(/^électrique/gim, '')
     .replace(/(^1ere|^1er|^2ème|^3ème|4ème|5ème) partie/gim, '')
     .replace(/^1ere|^1er|^2ème|^3ème|4ème|5ème/gim, '')

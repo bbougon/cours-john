@@ -19,7 +19,13 @@ describe('Generate guitar classes', () => {
       {
         title: 'You only live once',
         classId: videoDTO.classId,
-        videos: [{ title: 'Riff you only live once', id: videoDTO.id, image: videoDTO.image }],
+        videos: [
+          {
+            title: 'Riff you only live once',
+            id: videoDTO.id,
+            image: videoDTO.image,
+          },
+        ],
       },
     ]);
   });
@@ -43,16 +49,25 @@ describe('Generate guitar classes', () => {
     ]);
   });
 
-  it('For name containing Lick', () => {
-    const lickSong = aVideoDTOBuilder().havingTitle('Lick My Song').build();
+  it.each([
+    { songName: 'Arpèges wicked games', title: 'Wicked games' },
+    { songName: 'Arpège wicked games', title: 'Wicked games' },
+    { songName: 'Bends wicked games', title: 'Wicked games' },
+    { songName: 'Bend wicked games', title: 'Wicked games' },
+    { songName: 'Vibrato wicked games', title: 'Wicked games' },
+    { songName: 'Lick Song name', title: 'Song name' },
+  ])('For name containing $songName', (song) => {
+    const lickSong = aVideoDTOBuilder().havingTitle(song.songName).build();
 
     const guitareClasses = generateGuitarClasses([lickSong]);
 
     expect(guitareClasses).toStrictEqual<GuitarClass[]>([
       {
-        title: 'My song',
+        title: song.title,
         classId: lickSong.classId,
-        videos: [{ title: lickSong.title, id: lickSong.id, image: lickSong.image }],
+        videos: [
+          { title: lickSong.title, id: lickSong.id, image: lickSong.image },
+        ],
       },
     ]);
   });
