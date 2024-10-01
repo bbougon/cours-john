@@ -1,44 +1,58 @@
 import { BookmarkRepository } from './bookmark/Bookmark.ts';
-import { MemoryStorage } from '../../test/domaine/memoryStorage.ts';
+import { VideoPlayerRepository } from './VideoPlayer.ts';
+import { MemoryRepositories } from '../infrastructure/repositories/memory/repositories.ts';
+import { GuitarClassRepository } from './class/classes.ts';
+import { YoutubeGuitarClassRepository } from '../infrastructure/repositories/youtube/YoutubeGuitarClassRepository.ts';
+import { YoutubeVideoPlayerRepository } from '../infrastructure/repositories/youtube/YoutubeVideoPlayerRepository.ts';
+import { ArtistRepository } from './class/Artist.ts';
+import { YoutubeArtistRepository } from '../infrastructure/repositories/youtube/YoutubeArtistRepository.ts';
 
 export interface Repository<T> {
   persist(entity: T): void;
 }
 
-interface Repositories {
+export interface Repositories {
   bookmarks(): BookmarkRepository;
-}
 
-class MemoryBookmarkRepository extends BookmarkRepository {
-  public readonly memoryStorage: MemoryStorage;
+  videoPlayer(): VideoPlayerRepository;
 
-  constructor() {
-    const memoryStorage = new MemoryStorage();
-    super(memoryStorage);
-    this.memoryStorage = memoryStorage;
-  }
-}
+  guitarClass(): GuitarClassRepository;
 
-class MemoryRepositories implements Repositories {
-  private readonly bookmarkRepository: BookmarkRepository =
-    new MemoryBookmarkRepository();
-
-  bookmarks(): BookmarkRepository {
-    return this.bookmarkRepository;
-  }
+  artists(): ArtistRepository;
 }
 
 class JohnRepositories implements Repositories {
-  private readonly bookmakRepository: BookmarkRepository = new BookmarkRepository(window.localStorage)
+  private readonly bookmakRepository: BookmarkRepository =
+    new BookmarkRepository(window.localStorage);
+  private readonly videoPlayerRepository: VideoPlayerRepository =
+    new YoutubeVideoPlayerRepository();
+  private guitarClassRepository: GuitarClassRepository =
+    new YoutubeGuitarClassRepository();
+  private artistRepository: ArtistRepository = new YoutubeArtistRepository();
+
+  artists(): ArtistRepository {
+    return this.artistRepository;
+  }
+
   bookmarks(): BookmarkRepository {
-    return this.bookmakRepository
+    return this.bookmakRepository;
+  }
+
+  guitarClass(): GuitarClassRepository {
+    return this.guitarClassRepository;
+  }
+
+  videoPlayer(): VideoPlayerRepository {
+    return this.videoPlayerRepository;
   }
 }
 
 export const repositories = () => {
   if (import.meta.env.DEV) {
-    return new MemoryRepositories();
+    return new MemoryRepositories({
+      fakeData: true,
+      useLocalStorage: import.meta.env.VITE_USE_LOCAL_STORAGE === 'true',
+    });
   }
   return new JohnRepositories();
 };
-

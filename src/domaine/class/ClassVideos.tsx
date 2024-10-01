@@ -1,10 +1,8 @@
 import { Video } from './classes.ts';
 import { PropsWithChildren, useCallback, useEffect, useState } from 'react';
 import { useBookmarks } from '../../hooks/hooks.ts';
-import { execute, parametersAPIBuilder } from '../../infrastructure/fetch.ts';
 import { slugify } from '../../infrastructure/slugify.ts';
-import {VideoPlayerAPIResponse} from "../../infrastructure/api";
-import { VideoPlayer } from '../VideoPlayer.ts';
+import { repositories } from '../repository.ts';
 
 type ClassVideosProperties = {
   videos: Video[];
@@ -32,21 +30,12 @@ const VideoElement = (properties: PropsWithChildren<VideoProperties>) => {
   }, [setSmallScreen]);
 
   const displayVideo = useCallback(() => {
-    execute<VideoPlayer, VideoPlayerAPIResponse>(
-      parametersAPIBuilder()
-        .video(properties.video.id, smallScreen)
-        .method('GET')
-        .build(),
-      fetch,
-      async (response) => {
-        const videoPlayerAPIResponse = await response;
-        return {
-          embeddedVideo: videoPlayerAPIResponse.items[0].player.embedHtml,
-        };
-      }
-    ).then((videoPlayer) => {
-      properties.onVideoTitleClick(videoPlayer.embeddedVideo);
-    });
+    repositories()
+      .videoPlayer()
+      .getByCriteria(properties.video.id, smallScreen)
+      .then((videoPlayer) => {
+        properties.onVideoTitleClick(videoPlayer.embeddedVideo);
+      });
   }, [smallScreen]);
 
   useEffect(() => {

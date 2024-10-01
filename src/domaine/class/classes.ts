@@ -1,3 +1,5 @@
+import { Repository } from '../repository.ts';
+
 export type GuitarClass = {
   title: string;
   classId: string;
@@ -15,6 +17,10 @@ export type Video = {
   id: string;
   image: string;
 };
+
+export interface GuitarClassRepository extends Repository<GuitarClass> {
+  byPlaylist(playlistId: string): Promise<GuitarClass[]>
+}
 
 const extractTitle = (titre: string) =>
   titre

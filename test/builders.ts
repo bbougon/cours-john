@@ -33,16 +33,47 @@ class VideoDTOBuilder implements Builder<VideoDTO> {
   }
 }
 
+class GuitarClassBuilder implements Builder<GuitarClass> {
+  private title: string = fakerFR.music.songName();
+  private videos: Video[] = [];
+  private classId: string = fakerFR.string.alpha();
+
+  withClassId(classId: string): GuitarClassBuilder {
+    this.classId = classId;
+    return this;
+  }
+
+  withVideos(videos: Video[]): GuitarClassBuilder {
+    this.videos.push(...videos);
+    return this;
+  }
+
+  withNumberOfVideos(numberOfVideos: number): GuitarClassBuilder {
+    for (let i = 0; i < numberOfVideos; i++) {
+      const video = new VideoBuilder()
+        .havingTitle(this.title)
+        .randomNameFromPrevious()
+        .build();
+      this.videos.push(video);
+    }
+    return this;
+  }
+
+  build(): GuitarClass {
+    return {
+      classId: this.classId,
+      title: this.title,
+      videos: this.videos,
+    };
+  }
+}
+
 class GuitarClassesBuilder implements Builder<GuitarClass[]> {
   private guitarClasses: GuitarClass[] = [];
 
   createClasses(numberOfClasses: number): GuitarClassesBuilder {
     for (let i = 0; i < numberOfClasses; i++) {
-      this.guitarClasses.push({
-        title: fakerFR.music.songName(),
-        videos: [],
-        classId: fakerFR.string.alpha(),
-      });
+      this.guitarClasses.push(new GuitarClassBuilder().build());
     }
     return this;
   }
@@ -55,7 +86,7 @@ class GuitarClassesBuilder implements Builder<GuitarClass[]> {
 class ArtistBuilder implements Builder<Artist> {
   private artistName: string = fakerFR.music.artist();
   private id: string = fakerFR.string.alpha();
-  private thumbnail: string = fakerFR.string.alpha();
+  private thumbnail: string = fakerFR.image.url();
 
   withName(artistName: string): ArtistBuilder {
     this.artistName = artistName;
@@ -98,7 +129,17 @@ class BookmarkBuilder implements Builder<Bookmark> {
 class VideoBuilder implements Builder<Video> {
   private id: string = fakerFR.string.alpha();
   private title: string = `${fakerFR.string.alpha()} - ${fakerFR.music.songName()}`;
-  private image: string = fakerFR.internet.url();
+  private image: string = fakerFR.image.url();
+
+  havingTitle(titre: string): VideoBuilder {
+    this.title = titre;
+    return this;
+  }
+
+  randomNameFromPrevious(): VideoBuilder {
+    this.title = `${fakerFR.helpers.arrayElement(['Riff 1', 'riff 1', 'Riff 2', 'Riff partie 1', 'Solo', 'Solo partie 1', 'Rythmique'])} ${this.title}`;
+    return this;
+  }
 
   build(): Video {
     return {
@@ -109,8 +150,9 @@ class VideoBuilder implements Builder<Video> {
   }
 }
 
-const aVideoBuilder = () => new VideoBuilder();
+export const aVideoBuilder = () => new VideoBuilder();
 export const aVideoDTOBuilder = () => new VideoDTOBuilder();
 export const aGuitarClassesBuilder = () => new GuitarClassesBuilder();
+export const aGuitarClassBuilder = () => new GuitarClassBuilder();
 export const anArtistBuilder = () => new ArtistBuilder();
 export const aBookmarkBuilder = () => new BookmarkBuilder();

@@ -5,7 +5,6 @@ import {
   useReducer,
   useState,
 } from 'react';
-import { generateGuitarClasses, GuitarClass } from './classes.ts';
 import { ClassesStack } from './ClassesStack.tsx';
 import {
   artistCardReducer,
@@ -20,10 +19,9 @@ import {
   artistsLoaded,
   artistsReducer,
 } from './artistsReducer.ts';
-import { execute, parametersAPIBuilder } from '../../infrastructure/fetch.ts';
 import { useArtists } from '../../hooks/hooks.ts';
 import { slugify } from '../../infrastructure/slugify.ts';
-import {VideoAPIResponse} from "../../infrastructure/api";
+import { repositories } from '../repository.ts';
 
 type ArtistCardProperties = {
   artist: Artist;
@@ -39,24 +37,9 @@ const ArtistCard = ({ artist }: ArtistCardProperties) => {
     (event: React.MouseEvent<HTMLAnchorElement>, playlistId: string) => {
       event.preventDefault();
       if (artistCardState.guitarClasses.length === 0) {
-        execute<GuitarClass[], VideoAPIResponse>(
-          parametersAPIBuilder()
-            .playlistItems(playlistId)
-            .method('GET')
-            .build(),
-          fetch,
-          async (reponse) => {
-            const reponseVideoDTO = await reponse;
-            return generateGuitarClasses(
-              reponseVideoDTO.items.map((i) => ({
-                title: i.snippet.title,
-                classId: i.snippet.playlistId,
-                id: i.snippet.resourceId.videoId,
-                image: i.snippet.thumbnails.medium.url,
-              }))
-            );
-          }
-        )
+        repositories()
+          .guitarClass()
+          .byPlaylist(playlistId)
           .then((guitarClasses) =>
             dispatch(displayGuitarClasses(guitarClasses))
           )

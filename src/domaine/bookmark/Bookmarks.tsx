@@ -4,10 +4,9 @@ import {
   bookmarksVideoReducer,
   loadBookmarks,
 } from './bookmarksVideoReducer.ts';
-import { execute, parametersAPIBuilder } from '../../infrastructure/fetch';
-import {VideoPlayerAPIResponse} from "../../infrastructure/api";
 import { Video } from './Bookmark.ts';
 import { VideoPlayer } from '../VideoPlayer.ts';
+import { repositories } from '../repository.ts';
 
 type VideoElementProperties = {
   videoSet: Video[];
@@ -27,21 +26,12 @@ const VideoElement = ({ videoSet, videoToDisplay }: VideoElementProperties) => {
 
   useEffect(() => {
     if (videoToDisplay && videoSet.includes(videoToDisplay)) {
-      execute<VideoPlayer, VideoPlayerAPIResponse>(
-        parametersAPIBuilder()
-          .video(videoToDisplay.id, smallScreen)
-          .method('GET')
-          .build(),
-        fetch,
-        async (response) => {
-          const videoPlayerAPIResponse = await response;
-          return {
-            embeddedVideo: videoPlayerAPIResponse.items[0].player.embedHtml,
-          };
-        }
-      ).then((videoPlayer) =>
-        setVideoPlayer({ title: videoToDisplay.title, videoPlayer })
-      );
+      repositories()
+        .videoPlayer()
+        .getByCriteria(videoToDisplay.id, smallScreen)
+        .then((videoPlayer) =>
+          setVideoPlayer({ title: videoToDisplay.title, videoPlayer })
+        );
     }
   }, [smallScreen, videoToDisplay]);
 
