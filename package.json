@@ -11,7 +11,7 @@
     "test": "tsc --noEmit -p test/tsconfig.test.json && vitest",
     "test:watch": "tsc --noEmit -p test/tsconfig.test.json && vitest --ui --reporter verbose",
     "format:check": "npx prettier --config=./.prettierrc.json -c .",
-    "format:fix": "npx prettier --config=./.prettierrc.json ."
+    "format:fix": "npx prettier --config=./.prettierrc.json -w ."
   },
   "dependencies": {
     "deep-equal": "^2.2.3",

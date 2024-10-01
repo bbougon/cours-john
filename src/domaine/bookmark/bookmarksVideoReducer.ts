@@ -38,12 +38,11 @@ export const bookmarksVideoReducer = (
         return previous;
       }, new Map<string, { classId: string; videos: Video[] }>());
       const guitarClasses = Object.entries(Object.fromEntries(classes)).map(
-        ([className, currentClass]) =>
-          ({
-            classId: currentClass.classId,
-            title: className,
-            videos: currentClass.videos,
-          })
+        ([className, currentClass]) => ({
+          classId: currentClass.classId,
+          title: className,
+          videos: currentClass.videos,
+        })
       );
       return {
         ...state,

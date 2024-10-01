@@ -9,7 +9,7 @@ export type VideoDTO = {
   title: string;
   id: string;
   classId: string;
-  image: string
+  image: string;
 };
 
 export type Video = {
@@ -19,7 +19,7 @@ export type Video = {
 };
 
 export interface GuitarClassRepository extends Repository<GuitarClass> {
-  byPlaylist(playlistId: string): Promise<GuitarClass[]>
+  byPlaylist(playlistId: string): Promise<GuitarClass[]>;
 }
 
 const extractTitle = (titre: string) =>
@@ -90,7 +90,9 @@ export const generateGuitarClasses = (videoDTOS: VideoDTO[]): GuitarClass[] => {
       return {
         title: `${title[0].toUpperCase()}${title.slice(1)}`,
         classId: videos[0].classId,
-        videos: videos.map(({classId, ...otherAttributes}) => otherAttributes),
+        videos: videos.map(
+          ({ classId, ...otherAttributes }) => otherAttributes
+        ),
       };
     }
   );

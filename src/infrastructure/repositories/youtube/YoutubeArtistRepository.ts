@@ -5,17 +5,14 @@ import { ArtistAPIResponse } from '../../api.ts';
 export class YoutubeArtistRepository implements ArtistRepository {
   getAll(): Promise<Artist[]> {
     return execute<Artist[], ArtistAPIResponse>(
-      parametersAPIBuilder()
-        .playlists()
-        .method('GET')
-        .build(),
+      parametersAPIBuilder().playlists().method('GET').build(),
       fetch,
       async (reponse) => {
         const artistsDTO = await reponse;
         const artists = artistsDTO.items.map((a) => ({
           name: a.snippet.title,
           id: a.id,
-          thumbnail: a.snippet.thumbnails.default.url
+          thumbnail: a.snippet.thumbnails.default.url,
         }));
         const prochainePage = artistsDTO.nextPageToken;
         if (prochainePage) {
@@ -23,7 +20,7 @@ export class YoutubeArtistRepository implements ArtistRepository {
         }
         return artists;
       }
-    )
+    );
   }
 
   private async paginate(
@@ -32,10 +29,7 @@ export class YoutubeArtistRepository implements ArtistRepository {
   ): Promise<Artist[]> {
     if (pageToken) {
       return execute<Artist[], ArtistAPIResponse>(
-        parametersAPIBuilder()
-          .playlists(pageToken)
-          .method('GET')
-          .build(),
+        parametersAPIBuilder().playlists(pageToken).method('GET').build(),
         fetch,
         async (response) => {
           const artistsDTO = await response;
@@ -43,7 +37,7 @@ export class YoutubeArtistRepository implements ArtistRepository {
             ...artistsDTO.items.map((a) => ({
               name: a.snippet.title,
               id: a.id,
-              thumbnail: a.snippet.thumbnails.default.url
+              thumbnail: a.snippet.thumbnails.default.url,
             }))
           );
           const prochainePage = artistsDTO.nextPageToken;
@@ -55,7 +49,7 @@ export class YoutubeArtistRepository implements ArtistRepository {
       ).then((artists) => artists);
     }
     return artists;
-  };
+  }
 
   persist(_entity: Artist) {
     throw new Error(

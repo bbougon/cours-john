@@ -9,10 +9,7 @@ import { VideoAPIResponse } from '../../api.ts';
 export class YoutubeGuitarClassRepository implements GuitarClassRepository {
   byPlaylist(playlistId: string): Promise<GuitarClass[]> {
     return execute<GuitarClass[], VideoAPIResponse>(
-      parametersAPIBuilder()
-        .playlistItems(playlistId)
-        .method('GET')
-        .build(),
+      parametersAPIBuilder().playlistItems(playlistId).method('GET').build(),
       fetch,
       async (reponse) => {
         const reponseVideoDTO = await reponse;
@@ -25,8 +22,7 @@ export class YoutubeGuitarClassRepository implements GuitarClassRepository {
           }))
         );
       }
-    )
-
+    );
   }
   persist(_entity: GuitarClass): void {
     throw new Error('Method not implemented.');

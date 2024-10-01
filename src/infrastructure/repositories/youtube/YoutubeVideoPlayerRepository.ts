@@ -1,4 +1,7 @@
-import { VideoPlayer, VideoPlayerRepository } from '../../../domaine/VideoPlayer.ts';
+import {
+  VideoPlayer,
+  VideoPlayerRepository,
+} from '../../../domaine/VideoPlayer.ts';
 import { execute, parametersAPIBuilder } from '../../fetch.ts';
 import { VideoPlayerAPIResponse } from '../../api.ts';
 

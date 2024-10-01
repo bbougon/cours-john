@@ -1,1 +1,2 @@
-export const slugify = (toSlug: string): string => toSlug.toLowerCase().replace(' ', '-')
+export const slugify = (toSlug: string): string =>
+  toSlug.toLowerCase().replace(' ', '-');

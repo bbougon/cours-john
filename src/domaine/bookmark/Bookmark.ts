@@ -1,4 +1,4 @@
-import {StorageRepository} from "../storageRepository.ts";
+import { StorageRepository } from '../storageRepository.ts';
 
 export type Video = {
   title: string;

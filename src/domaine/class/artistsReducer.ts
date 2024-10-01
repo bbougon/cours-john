@@ -29,12 +29,12 @@ export const artistsReducer = (
   action: ArtistsAction
 ): ArtistsState => {
   switch (action.type) {
-      case ArtistActionType.ARTISTS_FILTER_RESET:
-          return {
-              ...state,
-              filteredArtists : () => state.artists
-          };
-      case ArtistActionType.ARTISTS_FILTERED:
+    case ArtistActionType.ARTISTS_FILTER_RESET:
+      return {
+        ...state,
+        filteredArtists: () => state.artists,
+      };
+    case ArtistActionType.ARTISTS_FILTERED:
       return {
         ...state,
         filteredArtists: () =>

@@ -1,8 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { aBookmarkBuilder } from '../builders';
-import {
-  repositories,
-} from '../../src/domaine/repository';
+import { repositories } from '../../src/domaine/repository';
 import { MemoryStorage } from './memoryStorage';
 import { StorageRepository } from '../../src/domaine/storageRepository';
 import { Bookmark } from '../../src/domaine/bookmark/Bookmark';
