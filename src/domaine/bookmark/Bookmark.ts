@@ -12,6 +12,12 @@ export type Bookmark = {
   video: Video;
 };
 
+export type GuitarClass = {
+  title: string;
+  classId: string;
+  videos: Video[];
+};
+
 export class BookmarkRepository extends StorageRepository<Bookmark> {
   constructor(storage: Storage) {
     super(storage);

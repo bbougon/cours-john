@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { aBookmarkBuilder } from '../../builders';
+import { aBookmarkBuilder, aBookmarkClassesBuilder } from '../../builders';
 import {
+  removesBookmark,
   bookmarksVideoReducer,
   BookmarksVideoState,
   loadBookmarks,
@@ -60,6 +61,66 @@ describe('Bookmarks Video Reducer', () => {
           ],
         },
       ],
+    });
+  });
+
+  it('Removes a bookmark', () => {
+    const introEnterSandman = aBookmarkBuilder()
+      .forClass('Enter Sandman')
+      .withVideoName('Intro Enter Sandman')
+      .build();
+    const coupletEnterSandman = aBookmarkBuilder()
+      .forClass('Enter Sandman')
+      .withVideoName('Couplet Enter Sandman')
+      .build();
+
+    const bookmarksVideoState = bookmarksVideoReducer(
+      {
+        bookmarks: [introEnterSandman, coupletEnterSandman],
+        classes: [
+          aBookmarkClassesBuilder()
+            .from([introEnterSandman, coupletEnterSandman])
+            .build(),
+        ],
+      },
+      removesBookmark(introEnterSandman)
+    );
+
+    expect(bookmarksVideoState).toStrictEqual<BookmarksVideoState>({
+      bookmarks: [coupletEnterSandman],
+      classes: [
+        {
+          title: 'Enter Sandman',
+          classId: coupletEnterSandman.classId,
+          videos: [
+            {
+              title: 'Couplet Enter Sandman',
+              id: coupletEnterSandman.video.id,
+              image: coupletEnterSandman.video.image,
+            },
+          ],
+        },
+      ],
+    });
+  });
+
+  it('Removes the class if the bookmark was the last', () => {
+    const introEnterSandman = aBookmarkBuilder()
+      .forClass('Enter Sandman')
+      .withVideoName('Intro Enter Sandman')
+      .build();
+
+    const bookmarksVideoState = bookmarksVideoReducer(
+      {
+        bookmarks: [introEnterSandman],
+        classes: [aBookmarkClassesBuilder().from([introEnterSandman]).build()],
+      },
+      removesBookmark(introEnterSandman)
+    );
+
+    expect(bookmarksVideoState).toStrictEqual<BookmarksVideoState>({
+      bookmarks: [],
+      classes: [],
     });
   });
 });

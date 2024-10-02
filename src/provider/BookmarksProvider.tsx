@@ -19,13 +19,14 @@ export const BookmarksProvider = ({ children }: PropsWithChildren) => {
   const add = useCallback(
     (bookmark: Bookmark) => {
       repositories().bookmarks().persist(bookmark);
-      setNumberOfBookmarks(numberOfBookmarks + 1);
+      setNumberOfBookmarks(repositories().bookmarks().getAll().length);
     },
     [numberOfBookmarks]
   );
 
   const remove = (bookmark: Bookmark) => {
     repositories().bookmarks().delete(bookmark);
+    setNumberOfBookmarks(repositories().bookmarks().getAll().length)
   };
 
   const list = useCallback((): Bookmark[] => {

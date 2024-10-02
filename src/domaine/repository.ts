@@ -47,12 +47,11 @@ class JohnRepositories implements Repositories {
   }
 }
 
+const repositoriesInstance = import.meta.env.DEV ? new MemoryRepositories({
+  fakeData: true,
+  useLocalStorage: import.meta.env.VITE_USE_LOCAL_STORAGE === 'true',
+}) : new JohnRepositories();
+
 export const repositories = () => {
-  if (import.meta.env.DEV) {
-    return new MemoryRepositories({
-      fakeData: true,
-      useLocalStorage: import.meta.env.VITE_USE_LOCAL_STORAGE === 'true',
-    });
-  }
-  return new JohnRepositories();
+  return repositoriesInstance
 };
