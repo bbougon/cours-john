@@ -15,6 +15,11 @@ export const Sidebar = () => {
   useEffect(() => {
     setNumberOfBookmarks(bookmarks.list().length);
   }, [bookmarks.numberOfBookmarks]);
+
+  const hideSidebar = () => {
+    setTranslation('-translate-x-full');
+  };
+
   return (
     <>
       <button
@@ -47,6 +52,33 @@ export const Sidebar = () => {
         aria-label="Sidebar"
       >
         <div className="h-full overflow-y-auto bg-gray-50 px-3 py-4 dark:bg-gray-800">
+          <div className="mt-2 flex place-content-end text-gray-500 sm:hidden">
+            <button
+              data-drawer-target="default-sidebar"
+              data-drawer-toggle="default-sidebar"
+              aria-controls="default-sidebar"
+              type="button"
+              className="inline-flex items-center rounded-lg border border-gray-300 px-1 py-1 text-sm hover:border-gray-500 focus:outline-none sm:hidden"
+              onClick={hideSidebar}
+            >
+              <span className="mr-2">Close</span>
+              <span className="sr-only">Close sidebar</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="size-4"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18 18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
           <ul className="space-y-2 font-medium">
             <li>
               <a
