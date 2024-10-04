@@ -30,6 +30,14 @@ class ParametersAPIBuilder<CORPS = void> {
     return this;
   }
 
+  searchLastVideos(
+    from: Date,
+    tokenPage?: string
+  ): ParametersAPIBuilder<CORPS> {
+    this._url = `${this.youtubeURL}search?key=${import.meta.env['VITE_YOUTUBE_API_KEY']}&part=snippet&channelId=${import.meta.env['VITE_YOUTUBE_CHANNEL_ID']}&publishedAfter=${from.toISOString()}&order=date${tokenPage ? `&pageToken=${tokenPage}` : ''}&maxResults=48`;
+    return this;
+  }
+
   method(method: string): ParametersAPIBuilder<CORPS> {
     this._method = method;
     return this;

@@ -15,7 +15,10 @@ type VideoElementProperties = {
   videoToDisplay: Video | undefined;
 };
 
-const VideoElement = ({ videoSet, videoToDisplay }: VideoElementProperties) => {
+export const VideoElement = ({
+  videoSet,
+  videoToDisplay,
+}: VideoElementProperties) => {
   const [smallScreen, setSmallScreen] = useState(false);
   const [videoPlayer, setVideoPlayer] = useState<{
     title: string;

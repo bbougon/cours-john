@@ -11,7 +11,7 @@ export type VideoAPIResponse = APIResponse<{
   id: string;
 }>;
 type APIResponse<T> = {
-  nextPageToken: string;
+  nextPageToken?: string;
   items: T[];
 };
 export type ArtistAPIResponse = APIResponse<{
@@ -25,3 +25,17 @@ export type ArtistAPIResponse = APIResponse<{
     };
   };
 }>;
+export type SearchAPIResponse = APIResponse<{
+  id: { videoId: string };
+  snippet: {
+    title: string;
+    channelId: string;
+    thumbnails: { default: { url: string } };
+    publishTime: string;
+  };
+}> & {
+  pageInfo: {
+    totalResults: number;
+    resultsPerPage: number;
+  };
+};

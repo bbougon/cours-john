@@ -6,6 +6,8 @@ import { YoutubeGuitarClassRepository } from '../infrastructure/repositories/you
 import { YoutubeVideoPlayerRepository } from '../infrastructure/repositories/youtube/YoutubeVideoPlayerRepository.ts';
 import { ArtistRepository } from './class/Artist.ts';
 import { YoutubeArtistRepository } from '../infrastructure/repositories/youtube/YoutubeArtistRepository.ts';
+import { LastVideosRepository } from './last-videos/lastVideo.ts';
+import { YoutubeLastVideosRepository } from '../infrastructure/repositories/youtube/YoutubeLastVideosRepository.ts';
 
 export interface Repository<T> {
   persist(entity: T): void;
@@ -19,6 +21,8 @@ export interface Repositories {
   guitarClass(): GuitarClassRepository;
 
   artists(): ArtistRepository;
+
+  lastVideos(): LastVideosRepository;
 }
 
 class JohnRepositories implements Repositories {
@@ -29,7 +33,8 @@ class JohnRepositories implements Repositories {
   private guitarClassRepository: GuitarClassRepository =
     new YoutubeGuitarClassRepository();
   private artistRepository: ArtistRepository = new YoutubeArtistRepository();
-
+  private lastVideosRepository: LastVideosRepository =
+    new YoutubeLastVideosRepository();
   artists(): ArtistRepository {
     return this.artistRepository;
   }
@@ -45,13 +50,19 @@ class JohnRepositories implements Repositories {
   videoPlayer(): VideoPlayerRepository {
     return this.videoPlayerRepository;
   }
+
+  lastVideos(): LastVideosRepository {
+    return this.lastVideosRepository;
+  }
 }
 
-const repositoriesInstance = import.meta.env.DEV ? new MemoryRepositories({
-  fakeData: true,
-  useLocalStorage: import.meta.env.VITE_USE_LOCAL_STORAGE === 'true',
-}) : new JohnRepositories();
+const repositoriesInstance: Repositories = import.meta.env.DEV
+  ? new MemoryRepositories({
+      fakeData: true,
+      useLocalStorage: import.meta.env.VITE_USE_LOCAL_STORAGE === 'true',
+    })
+  : new JohnRepositories();
 
-export const repositories = () => {
-  return repositoriesInstance
+export const repositories = (): Repositories => {
+  return repositoriesInstance;
 };

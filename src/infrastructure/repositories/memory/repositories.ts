@@ -12,14 +12,20 @@ import {
 import { Artist, ArtistRepository } from '../../../domaine/class/Artist.ts';
 import {
   aGuitarClassBuilder,
+  aLastVideosBuilder,
   anArtistBuilder,
 } from '../../../../test/builders.ts';
 import { fakerFR } from '@faker-js/faker';
+import {
+  LastVideo,
+  LastVideos,
+  LastVideosRepository,
+} from '../../../domaine/last-videos/lastVideo.ts';
 
 export class MemoryVideoPlayerRepository implements VideoPlayerRepository {
   getByCriteria(_id: string, _smallScreen: boolean): Promise<VideoPlayer> {
     return Promise.resolve({
-      embeddedVideo: `<img src="${fakerFR.image.url()}" width="600" height="480" />`,
+      embeddedVideo: `<img src="${fakerFR.image.url({ width: 600, height: 400 })}" width="600" height="480" />`,
     });
   }
 
@@ -67,6 +73,30 @@ class MemoryArtistRepository implements ArtistRepository {
   }
 }
 
+class MemoryLastVideosRepository implements LastVideosRepository {
+  private videos: LastVideos = { numberOfVideos: 0, videos: new Map() };
+  private currentIndex = 1;
+
+  get(): Promise<LastVideos> {
+    return Promise.resolve(this.videos);
+  }
+
+  persist(entity: LastVideo): void {
+    ++this.videos.numberOfVideos;
+    if (this.videos.videos.size === 0) {
+      this.videos.videos.set(this.currentIndex, [entity]);
+    } else {
+      const lastVideos = this.videos.videos.get(this.currentIndex);
+      if (lastVideos && lastVideos.length < 8) {
+        lastVideos.push(entity);
+      } else {
+        this.currentIndex++;
+        this.videos.videos.set(this.currentIndex, [entity]);
+      }
+    }
+  }
+}
+
 export class MemoryRepositories implements Repositories {
   private readonly bookmarkRepository: BookmarkRepository =
     new MemoryBookmarkRepository();
@@ -75,6 +105,8 @@ export class MemoryRepositories implements Repositories {
   private guitarClassRepository: GuitarClassRepository =
     new MemoryGuitarClassRepository();
   private artistRepository: ArtistRepository = new MemoryArtistRepository();
+  private lastVideosRepository: LastVideosRepository =
+    new MemoryLastVideosRepository();
 
   constructor(
     configuration: { fakeData: boolean; useLocalStorage: boolean } = {
@@ -98,6 +130,9 @@ export class MemoryRepositories implements Repositories {
           this.guitarClassRepository.persist(guitarClass);
         }
       }
+      aLastVideosBuilder()
+        .build()
+        .forEach((video) => this.lastVideosRepository.persist(video));
     }
   }
 
@@ -115,5 +150,9 @@ export class MemoryRepositories implements Repositories {
 
   videoPlayer(): VideoPlayerRepository {
     return this.videoPlayerRepository;
+  }
+
+  lastVideos(): LastVideosRepository {
+    return this.lastVideosRepository;
   }
 }

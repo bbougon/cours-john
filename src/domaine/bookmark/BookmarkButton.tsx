@@ -1,9 +1,9 @@
 export const BookmarkButton = ({
-                                 onBookmarkClick,
-                                 bookmarked,
-                               }: {
+  onBookmarkClick,
+  bookmarked,
+}: {
   onBookmarkClick: () => void;
-  bookmarked: boolean
+  bookmarked: boolean;
 }) => {
   return (
     <div
