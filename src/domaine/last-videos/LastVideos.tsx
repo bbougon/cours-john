@@ -9,7 +9,7 @@ import {
 } from './lastVideosReducer.ts';
 import { LastVideo, Video } from './lastVideo.ts';
 import { intlFormat } from 'date-fns';
-import { VideoElement } from '../bookmark/Bookmarks.tsx';
+import { VideoElement } from '../video/VideoElement.tsx';
 
 type VideoCardProperties = { video: LastVideo; onVideoClick: () => void };
 const VideoCard = ({ video, onVideoClick }: VideoCardProperties) => {
