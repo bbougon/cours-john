@@ -3,7 +3,11 @@ import { aBookmarkBuilder } from '../builders';
 import { repositories } from '../../src/domaine/repository';
 import { MemoryStorage } from './memoryStorage';
 import { StorageRepository } from '../../src/domaine/storageRepository';
-import { Bookmark } from '../../src/domaine/bookmark/Bookmark';
+import {
+  Bookmark,
+  BookmarkRepository,
+} from '../../src/domaine/bookmark/Bookmark';
+import { fakerFR } from '@faker-js/faker';
 
 describe('Storage repository', () => {
   let memoryStorage = new MemoryStorage();
@@ -145,8 +149,93 @@ describe('Storage repository', () => {
         bookmarkRepository.findByVideoId(bookmark1.video.id)
       ).toStrictEqual<Bookmark>(bookmark1);
     });
+
+    it('Can migrate old bookmarks', () => {
+      const memoryStorage = new MemoryStorage();
+      const oldBookmarkRepository = new OldBookmarkRepository(memoryStorage);
+      const firstSongName = fakerFR.music.songName();
+      const firstBookmark = {
+        classId: fakerFR.string.alpha(10),
+        className: firstSongName,
+        video: {
+          id: fakerFR.string.alpha(10),
+          image: fakerFR.image.url(),
+          title: firstSongName,
+        },
+      };
+      const secondSongName = fakerFR.music.songName();
+      const secondBookmark = {
+        classId: fakerFR.string.alpha(10),
+        className: secondSongName,
+        video: {
+          id: fakerFR.string.alpha(10),
+          image: fakerFR.image.url(),
+          title: secondSongName,
+        },
+      };
+      oldBookmarkRepository.persist(firstBookmark);
+      oldBookmarkRepository.persist(secondBookmark);
+
+      new BookmarkRepository(memoryStorage);
+
+      expect(JSON.parse(memoryStorage.getItem('john-storage')!)).toStrictEqual({
+        bookmarks: [
+          {
+            className: firstSongName,
+            video: {
+              id: expect.any(String),
+              image: expect.any(String),
+              title: firstSongName,
+            },
+          },
+          {
+            className: secondSongName,
+            video: {
+              id: expect.any(String),
+              image: expect.any(String),
+              title: secondSongName,
+            },
+          },
+        ],
+      });
+    });
+
+    it('Does not migrate if not necessary', () => {
+      const memoryStorage = new MemoryStorage();
+      const firstBookmark = aBookmarkBuilder().build();
+      const secondBookmark = aBookmarkBuilder().build();
+      memoryStorage.setItem('john-storage', JSON.stringify({bookmarks: [firstBookmark, secondBookmark]}))
+
+      new BookmarkRepository(memoryStorage);
+
+    expect(memoryStorage.migrationToHaveBeenCalled(1)).toBe(true)
+    })
   });
 });
+
+type Video = {
+  title: string;
+  id: string;
+  image: string;
+};
+
+type OldBookmark = {
+  className: string;
+  classId: string;
+  video: Video;
+};
+
+class OldBookmarkRepository extends StorageRepository<OldBookmark> {
+  toBePersisted(entity: OldBookmark): {
+    [key: string]: OldBookmark | OldBookmark[];
+  } {
+    return { bookmarks: [entity] };
+  }
+
+  protected entityKey(): string {
+    return 'bookmarks';
+  }
+}
 
 type AnEntity = { anEntity: string };
 

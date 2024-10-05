@@ -83,11 +83,10 @@ export const Bookmarks = () => {
   }, [bookmarks]);
 
   const onBookmarkClick = useCallback(
-    (classId: string, title: string, video: Video) => {
-      dispatch(removesBookmark({ className: title, classId, video }));
+    (title: string, video: Video) => {
+      dispatch(removesBookmark({ className: title, video }));
       bookmarks.remove({
         className: title,
-        classId,
         video,
       });
     },
@@ -97,7 +96,7 @@ export const Bookmarks = () => {
   return (
     <>
       {bookmarksVideoState.classes.map((cl) => (
-        <div key={`${cl.classId}`} className="py-12">
+        <div key={`${crypto.randomUUID()}`} className="py-12">
           <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
             <div className="mt-4 grid gap-4 lg:grid-cols-3 lg:grid-rows-2">
               <div className="relative lg:row-span-2">
@@ -120,7 +119,7 @@ export const Bookmarks = () => {
                           <div className="col-span-1 content-center text-end">
                             <BookmarkButton
                               onBookmarkClick={() =>
-                                onBookmarkClick(cl.classId, cl.title, v)
+                                onBookmarkClick(cl.title, v)
                               }
                               bookmarked={true}
                             />

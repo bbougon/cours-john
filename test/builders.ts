@@ -120,7 +120,6 @@ class ArtistBuilder implements Builder<Artist> {
 class BookmarkBuilder implements Builder<Bookmark> {
   private video: Video = aVideoBuilder().build();
   private className: string = fakerFR.music.artist();
-  private classId: string = fakerFR.string.alpha(10);
 
   forClass(className: string): BookmarkBuilder {
     this.className = className;
@@ -136,7 +135,6 @@ class BookmarkBuilder implements Builder<Bookmark> {
     return {
       video: this.video,
       className: this.className,
-      classId: this.classId,
     };
   }
 }
@@ -166,21 +164,18 @@ class VideoBuilder implements Builder<Video> {
 }
 
 class BookmarkClassesBuilder implements Builder<BookmarkGuitarClass> {
-  private classId: string = fakerFR.string.alpha(10);
   private title: string = fakerFR.music.songName();
   private videos: Video[] = [];
 
   from(bookmarks: Bookmark[]): BookmarkClassesBuilder {
     const guitarClass = bookmarks.reduce(
       (prev, curr) => {
-        prev.classId = curr.classId;
         prev.title = curr.className;
         prev.videos.push(curr.video);
         return prev;
       },
       { classId: '', title: '', videos: [] } as BookmarkGuitarClass
     );
-    this.classId = guitarClass.classId;
     this.title = guitarClass.title;
     this.videos = guitarClass.videos;
     return this;
@@ -188,7 +183,6 @@ class BookmarkClassesBuilder implements Builder<BookmarkGuitarClass> {
 
   build(): BookmarkGuitarClass {
     return {
-      classId: this.classId,
       title: this.title,
       videos: this.videos,
     };

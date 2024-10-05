@@ -1,5 +1,6 @@
 export class MemoryStorage implements Storage {
   public readonly entities: Map<string, string> = new Map();
+  private _migrationToHaveBeenCalled: number = 0;
 
   [name: string]: any;
 
@@ -23,9 +24,14 @@ export class MemoryStorage implements Storage {
 
   setItem(key: string, value: string): void {
     this.entities.set(key, value);
+    this._migrationToHaveBeenCalled = this._migrationToHaveBeenCalled + 1
   }
 
   add(value: string): void {
     this.entities.set('john-storage', value);
+  }
+
+  migrationToHaveBeenCalled(numberOfCalls: number): boolean {
+    return this._migrationToHaveBeenCalled === numberOfCalls
   }
 }

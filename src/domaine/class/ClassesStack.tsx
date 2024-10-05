@@ -21,13 +21,11 @@ const GuitarClassElement = (properties: GuitarClassProperties) => {
     if (bookmark.isVideoBookmarked(video)) {
       bookmark.remove({
         className: properties.guitarClass.title,
-        classId: properties.guitarClass.classId,
         video,
       });
     } else {
       bookmark.add({
         className: properties.guitarClass.title,
-        classId: properties.guitarClass.classId,
         video,
       });
     }

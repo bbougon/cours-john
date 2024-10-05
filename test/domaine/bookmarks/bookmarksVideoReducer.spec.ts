@@ -35,7 +35,6 @@ describe('Bookmarks Video Reducer', () => {
       classes: [
         {
           title: 'Big guns',
-          classId: bigGuns.classId,
           videos: [
             {
               title: 'Intro Big guns',
@@ -46,7 +45,6 @@ describe('Bookmarks Video Reducer', () => {
         },
         {
           title: 'Enter Sandman',
-          classId: introEnterSandman.classId,
           videos: [
             {
               title: 'Intro Enter Sandman',
@@ -91,7 +89,6 @@ describe('Bookmarks Video Reducer', () => {
       classes: [
         {
           title: 'Enter Sandman',
-          classId: coupletEnterSandman.classId,
           videos: [
             {
               title: 'Couplet Enter Sandman',

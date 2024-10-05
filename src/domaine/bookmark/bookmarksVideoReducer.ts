@@ -31,7 +31,6 @@ export const bookmarksVideoReducer = (
       const classes = state.classes.reduce((prev, cur) => {
         prev.push({
           title: cur.title,
-          classId: cur.classId,
           videos: cur.videos.filter((v) => {
             return v.id !== action.bookmark.video.id;
           }),
@@ -52,14 +51,12 @@ export const bookmarksVideoReducer = (
         } else {
           previous.set(current.className, {
             videos: [current.video],
-            classId: current.classId,
           });
         }
         return previous;
-      }, new Map<string, { classId: string; videos: Video[] }>());
+      }, new Map<string, { videos: Video[] }>());
       const guitarClasses = Object.entries(Object.fromEntries(classes)).map(
         ([className, currentClass]) => ({
-          classId: currentClass.classId,
           title: className,
           videos: currentClass.videos,
         })
