@@ -11,6 +11,7 @@ import { LastVideos } from './domaine/last-videos/LastVideos.tsx';
 import { LastVideosProvider } from './provider/LastVideosProvider.tsx';
 import { ErrorBoundary } from 'react-error-boundary';
 import { DisplayErrorComponent } from './components/DisplayErrorComponent.tsx';
+import { About } from './views/About.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -23,7 +24,8 @@ createRoot(document.getElementById('root')!).render(
                 <Route path="/" element={<Layout />}>
                   <Route index element={<Artists />} />
                   <Route path="bookmarks" element={<Bookmarks />} />
-                  <Route path="news" element={<LastVideos />} />
+                  <Route path="last-videos" element={<LastVideos />} />
+                  <Route path="about" element={<About />} />
                 </Route>
               </Routes>
             </BrowserRouter>

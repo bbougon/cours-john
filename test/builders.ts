@@ -259,7 +259,7 @@ class SearchAPIResponsePayloadBuilder implements Builder<SearchAPIResponse> {
         title: string;
         channelId: string;
         thumbnails: { default: { url: string } };
-        publishTime: string
+        publishTime: string;
       };
     }[] = [];
     for (let i = 0; i < this._numberOfVideos; i++) {

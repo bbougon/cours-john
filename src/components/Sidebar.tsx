@@ -131,7 +131,7 @@ export const Sidebar = () => {
             </li>
             <li>
               <Link
-                to="/news"
+                to="/last-videos"
                 className="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
               >
                 <svg

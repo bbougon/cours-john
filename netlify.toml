@@ -6,7 +6,7 @@
     script-src 'self' ;
     style-src 'self' https://rsms.me/inter/inter.css;
     connect-src 'self' https://www.googleapis.com;
-    img-src 'self' https://i.ytimg.com;
+    img-src 'self' https://i.ytimg.com https://yt3.googleusercontent.com/;
     frame-src 'self' https://youtube.com https://www.youtube.com;
     font-src 'self' https://rsms.me/inter/font-files/;'''
     X-Frame-Options = "DENY"

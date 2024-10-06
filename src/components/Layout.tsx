@@ -6,10 +6,12 @@ import { Outlet } from 'react-router-dom';
 export const Layout = () => {
   return (
     <>
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto flex h-screen min-h-screen max-w-7xl flex-col px-6 lg:px-8">
         <Header />
         <Sidebar />
-        <Outlet />
+        <main className="flex-grow">
+          <Outlet />
+        </main>
         <Footer />
       </div>
     </>

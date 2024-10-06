@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import defaultTheme from 'tailwindcss/defaultTheme';
-import plugin from '@tailwindcss/aspect-ratio';
+import plugin from 'tailwindcss/plugin';
 
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
@@ -11,5 +11,13 @@ export default {
       },
     },
   },
-  plugins: [plugin],
+  plugins: [
+    plugin(function ({ addBase, theme }) {
+      addBase({
+        h1: { fontSize: theme('fontSize.2xl') },
+        h2: { fontSize: theme('fontSize.xl') },
+        h3: { fontSize: theme('fontSize.lg') },
+      });
+    }),
+  ],
 };
