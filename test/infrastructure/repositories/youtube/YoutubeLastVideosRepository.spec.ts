@@ -77,7 +77,7 @@ describe('Youtube last videos repository', () => {
     }).get();
 
     expect(lastVideos.numberOfVideos).toBe(62);
-    expect(lastVideos.videos.size).toBe(8)
+    expect(lastVideos.videos.size).toBe(8);
   });
 
   it('Retrieves 48 videos and get 6 pages', async () => {
@@ -92,9 +92,9 @@ describe('Youtube last videos repository', () => {
     ).get();
 
     expect(lastVideos.numberOfVideos).toBe(48);
-    expect(lastVideos.videos.size).toBe(6)
+    expect(lastVideos.videos.size).toBe(6);
     const allVideos = Array.from(lastVideos.videos.values());
-    expect(allVideos.every(videos => videos.length === 8)).toBe(true)
+    expect(allVideos.every((videos) => videos.length === 8)).toBe(true);
   });
 });
 

@@ -204,12 +204,15 @@ describe('Storage repository', () => {
       const memoryStorage = new MemoryStorage();
       const firstBookmark = aBookmarkBuilder().build();
       const secondBookmark = aBookmarkBuilder().build();
-      memoryStorage.setItem('john-storage', JSON.stringify({bookmarks: [firstBookmark, secondBookmark]}))
+      memoryStorage.setItem(
+        'john-storage',
+        JSON.stringify({ bookmarks: [firstBookmark, secondBookmark] })
+      );
 
       new BookmarkRepository(memoryStorage);
 
-    expect(memoryStorage.migrationToHaveBeenCalled(1)).toBe(true)
-    })
+      expect(memoryStorage.migrationToHaveBeenCalled(1)).toBe(true);
+    });
   });
 });
 

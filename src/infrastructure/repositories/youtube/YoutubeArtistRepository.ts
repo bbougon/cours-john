@@ -1,6 +1,7 @@
 import { Artist, ArtistRepository } from '../../../domaine/class/Artist.ts';
 import { execute, parametersAPIBuilder } from '../../fetch.ts';
 import { ArtistAPIResponse } from '../../api.ts';
+import { mapYoutubeError, YoutubeError } from './youtube.ts';
 
 export class YoutubeArtistRepository implements ArtistRepository {
   getAll(): Promise<Artist[]> {
@@ -20,7 +21,7 @@ export class YoutubeArtistRepository implements ArtistRepository {
         }
         return artists;
       }
-    );
+    ).catch((error: YoutubeError) => Promise.reject(mapYoutubeError(error)));
   }
 
   private async paginate(
@@ -46,7 +47,9 @@ export class YoutubeArtistRepository implements ArtistRepository {
           }
           return artists;
         }
-      ).then((artists) => artists);
+      )
+        .then((artists) => artists)
+        .catch((error) => Promise.reject(mapYoutubeError(error)));
     }
     return artists;
   }

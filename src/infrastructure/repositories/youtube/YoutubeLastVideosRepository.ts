@@ -6,6 +6,7 @@ import {
 import { execute, parametersAPIBuilder } from '../../fetch.ts';
 import { SearchAPIResponse } from '../../api.ts';
 import { parseISO, startOfToday, sub } from 'date-fns';
+import { mapYoutubeError } from './youtube.ts';
 
 export class YoutubeLastVideosRepository implements LastVideosRepository {
   constructor(
@@ -36,7 +37,7 @@ export class YoutubeLastVideosRepository implements LastVideosRepository {
           dateAWeekAgo
         );
       }
-    );
+    ).catch((error) => Promise.reject(mapYoutubeError(error)));
   }
 
   private retrieveLastVideos(
@@ -99,7 +100,7 @@ export class YoutubeLastVideosRepository implements LastVideosRepository {
             lastVideos.videos.size
           );
         }
-      );
+      ).catch((error) => Promise.reject(mapYoutubeError(error)));
     }
     return lastVideos;
   }

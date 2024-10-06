@@ -61,7 +61,7 @@ export const execute = async <RESPONSE, APIRESPONSE, BODY = void>(
   call: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>,
   map: (content: Promise<APIRESPONSE>) => Promise<RESPONSE>
 ): Promise<RESPONSE> => {
-  const response = await call(apiParameters.url, {
+  return call(apiParameters.url, {
     method: apiParameters.method,
     ...(apiParameters.body && {
       body: JSON.stringify(apiParameters.body),
@@ -71,6 +71,10 @@ export const execute = async <RESPONSE, APIRESPONSE, BODY = void>(
       'Content-Type':
         apiParameters.headers?.['Content-Type'] || 'application/json',
     },
+  }).then(async (response) => {
+    if (!response.ok) {
+      return Promise.reject(await response.json());
+    }
+    return map(await response.json());
   });
-  return map(response.json());
 };

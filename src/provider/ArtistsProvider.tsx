@@ -1,6 +1,7 @@
 import { createContext, PropsWithChildren, useEffect, useState } from 'react';
 import { Artist } from '../domaine/class/Artist.ts';
 import { repositories } from '../domaine/repository.ts';
+import { useErrorBoundary } from 'react-error-boundary';
 
 type ArtistsProviderType = {
   artists: () => Artist[];
@@ -12,6 +13,7 @@ export const ContextArtists = createContext<ArtistsProviderType>({
 
 export const ArtistsProvider = ({ children }: PropsWithChildren) => {
   const [artists, setArtists] = useState<Artist[]>([]);
+  const { showBoundary } = useErrorBoundary();
 
   useEffect(() => {
     repositories()
@@ -26,7 +28,8 @@ export const ArtistsProvider = ({ children }: PropsWithChildren) => {
       })
       .then((artists) => {
         setArtists(artists);
-      });
+      })
+      .catch((error) => showBoundary(error));
   }, []);
 
   return (

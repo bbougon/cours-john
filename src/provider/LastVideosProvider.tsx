@@ -1,6 +1,7 @@
 import { createContext, PropsWithChildren, useEffect, useState } from 'react';
 import { repositories } from '../domaine/repository.ts';
 import { LastVideos } from '../domaine/last-videos/lastVideo.ts';
+import { useErrorBoundary } from 'react-error-boundary';
 
 type LastVideosType = {
   lastVideos: LastVideos;
@@ -17,6 +18,7 @@ export const LastVideosProvider = ({ children }: PropsWithChildren) => {
     numberOfVideos: 0,
     videos: new Map(),
   });
+  const { showBoundary } = useErrorBoundary();
 
   useEffect(() => {
     if (!hasBeenLoaded) {
@@ -26,7 +28,8 @@ export const LastVideosProvider = ({ children }: PropsWithChildren) => {
         .then((lastVideos) => {
           setHasBeenLoaded(true);
           setLastVideos(lastVideos);
-        });
+        })
+        .catch((error) => showBoundary(error));
     }
   }, [hasBeenLoaded]);
 

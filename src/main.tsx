@@ -9,23 +9,27 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Bookmarks } from './domaine/bookmark/Bookmarks.tsx';
 import { LastVideos } from './domaine/last-videos/LastVideos.tsx';
 import { LastVideosProvider } from './provider/LastVideosProvider.tsx';
+import { ErrorBoundary } from 'react-error-boundary';
+import { DisplayErrorComponent } from './components/DisplayErrorComponent.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <ArtistsProvider>
-        <BookmarksProvider>
-          <LastVideosProvider>
-            <Routes>
-              <Route path="/" element={<Layout />}>
-                <Route index element={<Artists />} />
-                <Route path="bookmarks" element={<Bookmarks />} />
-                <Route path="news" element={<LastVideos />} />
-              </Route>
-            </Routes>
-          </LastVideosProvider>
-        </BookmarksProvider>
-      </ArtistsProvider>
+      <ErrorBoundary FallbackComponent={DisplayErrorComponent}>
+        <ArtistsProvider>
+          <BookmarksProvider>
+            <LastVideosProvider>
+              <Routes>
+                <Route path="/" element={<Layout />}>
+                  <Route index element={<Artists />} />
+                  <Route path="bookmarks" element={<Bookmarks />} />
+                  <Route path="news" element={<LastVideos />} />
+                </Route>
+              </Routes>
+            </LastVideosProvider>
+          </BookmarksProvider>
+        </ArtistsProvider>
+      </ErrorBoundary>
     </BrowserRouter>
   </StrictMode>
 );

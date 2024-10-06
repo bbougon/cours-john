@@ -4,6 +4,7 @@ import {
 } from '../../../domaine/VideoPlayer.ts';
 import { execute, parametersAPIBuilder } from '../../fetch.ts';
 import { VideoPlayerAPIResponse } from '../../api.ts';
+import { mapYoutubeError } from './youtube.ts';
 
 export class YoutubeVideoPlayerRepository implements VideoPlayerRepository {
   getByCriteria(id: string, smallScreen: boolean): Promise<VideoPlayer> {
@@ -16,7 +17,7 @@ export class YoutubeVideoPlayerRepository implements VideoPlayerRepository {
           embeddedVideo: videoPlayerAPIResponse.items[0].player.embedHtml,
         };
       }
-    );
+    ).catch((error) => Promise.reject(mapYoutubeError(error)));
   }
 
   persist(_entity: VideoPlayer): void {

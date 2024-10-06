@@ -17,23 +17,21 @@ export type GuitarClass = {
 };
 
 class BookmarkMigration {
-  constructor(private readonly storage: Storage) {
-    
-  }
+  constructor(private readonly storage: Storage) {}
 
   migrate(): void {
     const item = this.storage.getItem('john-storage');
-    if(item) {
+    if (item) {
       const store = JSON.parse(item);
       const bookmarks = store['bookmarks'];
-      let needToPersistStore = false
+      let needToPersistStore = false;
       bookmarks.forEach((bookmark: { [x: string]: unknown }) => {
         if (bookmark['classId']) {
-          needToPersistStore = true
+          needToPersistStore = true;
           delete bookmark['classId'];
         }
       });
-      if(needToPersistStore) {
+      if (needToPersistStore) {
         this.storage.setItem('john-storage', JSON.stringify(store));
       }
     }

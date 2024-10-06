@@ -5,6 +5,7 @@ import {
 } from '../../../domaine/class/classes.ts';
 import { execute, parametersAPIBuilder } from '../../fetch.ts';
 import { VideoAPIResponse } from '../../api.ts';
+import { mapYoutubeError } from './youtube.ts';
 
 export class YoutubeGuitarClassRepository implements GuitarClassRepository {
   byPlaylist(playlistId: string): Promise<GuitarClass[]> {
@@ -22,8 +23,9 @@ export class YoutubeGuitarClassRepository implements GuitarClassRepository {
           }))
         );
       }
-    );
+    ).catch((error) => Promise.reject(mapYoutubeError(error)));
   }
+
   persist(_entity: GuitarClass): void {
     throw new Error('Method not implemented.');
   }

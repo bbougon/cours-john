@@ -24,7 +24,7 @@ export class MemoryStorage implements Storage {
 
   setItem(key: string, value: string): void {
     this.entities.set(key, value);
-    this._migrationToHaveBeenCalled = this._migrationToHaveBeenCalled + 1
+    this._migrationToHaveBeenCalled = this._migrationToHaveBeenCalled + 1;
   }
 
   add(value: string): void {
@@ -32,6 +32,6 @@ export class MemoryStorage implements Storage {
   }
 
   migrationToHaveBeenCalled(numberOfCalls: number): boolean {
-    return this._migrationToHaveBeenCalled === numberOfCalls
+    return this._migrationToHaveBeenCalled === numberOfCalls;
   }
 }
