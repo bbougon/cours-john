@@ -14,11 +14,11 @@ import { DisplayErrorComponent } from './components/DisplayErrorComponent.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <ErrorBoundary FallbackComponent={DisplayErrorComponent}>
-        <ArtistsProvider>
-          <BookmarksProvider>
-            <LastVideosProvider>
+    <ErrorBoundary FallbackComponent={DisplayErrorComponent}>
+      <ArtistsProvider>
+        <BookmarksProvider>
+          <LastVideosProvider>
+            <BrowserRouter>
               <Routes>
                 <Route path="/" element={<Layout />}>
                   <Route index element={<Artists />} />
@@ -26,10 +26,10 @@ createRoot(document.getElementById('root')!).render(
                   <Route path="news" element={<LastVideos />} />
                 </Route>
               </Routes>
-            </LastVideosProvider>
-          </BookmarksProvider>
-        </ArtistsProvider>
-      </ErrorBoundary>
-    </BrowserRouter>
+            </BrowserRouter>
+          </LastVideosProvider>
+        </BookmarksProvider>
+      </ArtistsProvider>
+    </ErrorBoundary>
   </StrictMode>
 );

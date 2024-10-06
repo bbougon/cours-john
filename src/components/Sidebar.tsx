@@ -1,5 +1,6 @@
 import { useBookmarks, useLastVideos } from '../hooks/hooks';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const Sidebar = () => {
   const bookmarks = useBookmarks();
@@ -82,8 +83,8 @@ export const Sidebar = () => {
           </div>
           <ul className="space-y-2 font-medium">
             <li>
-              <a
-                href="/"
+              <Link
+                to="/"
                 className="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
               >
                 <svg
@@ -101,11 +102,11 @@ export const Sidebar = () => {
                   />
                 </svg>
                 <span className="ms-3">Home</span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/bookmarks"
+              <Link
+                to="/bookmarks"
                 className="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
               >
                 <svg
@@ -126,11 +127,11 @@ export const Sidebar = () => {
                 <span className="ms-3 inline-flex items-center justify-center rounded-full bg-gray-100 px-2 text-sm font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-300">
                   {numberOfBookmarks}
                 </span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/news"
+              <Link
+                to="/news"
                 className="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
               >
                 <svg
@@ -154,7 +155,7 @@ export const Sidebar = () => {
                 <span className="ms-3 inline-flex items-center justify-center rounded-full bg-gray-100 px-2 text-sm font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-300">
                   {numberOfLastVideos}
                 </span>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

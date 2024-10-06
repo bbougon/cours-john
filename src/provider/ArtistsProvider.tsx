@@ -16,21 +16,20 @@ export const ArtistsProvider = ({ children }: PropsWithChildren) => {
   const { showBoundary } = useErrorBoundary();
 
   useEffect(() => {
-    repositories()
-      .artists()
-      .getAll()
-      .then((artistes: Artist[] | undefined) => {
-        if (artistes) {
-          artistes.sort((a, b) => (a.name > b.name ? 1 : -1));
-          return artistes;
-        }
-        return [];
-      })
-      .then((artists) => {
-        setArtists(artists);
-      })
-      .catch((error) => showBoundary(error));
-  }, []);
+    if (artists.length === 0) {
+      repositories()
+        .artists()
+        .getAll()
+        .then((artists: Artist[]) => {
+          artists.sort((a, b) => (a.name > b.name ? 1 : -1));
+          return artists;
+        })
+        .then((artists) => {
+          setArtists(artists);
+        })
+        .catch((error) => showBoundary(error));
+    }
+  }, [artists.length, showBoundary]);
 
   return (
     <ContextArtists.Provider

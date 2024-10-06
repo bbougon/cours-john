@@ -35,6 +35,7 @@ class JohnRepositories implements Repositories {
   private artistRepository: ArtistRepository = new YoutubeArtistRepository();
   private lastVideosRepository: LastVideosRepository =
     new YoutubeLastVideosRepository();
+
   artists(): ArtistRepository {
     return this.artistRepository;
   }
