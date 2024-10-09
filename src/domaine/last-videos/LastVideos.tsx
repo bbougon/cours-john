@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useReducer, useState } from 'react';
-import { useLastVideos } from '../../hooks/hooks.ts';
+import { useBookmarks, useLastVideos } from '../../hooks/hooks.ts';
 import {
   lastVideosReducer,
   loadLastVideos,
@@ -10,18 +10,50 @@ import {
 import { LastVideo, Video } from './lastVideo.ts';
 import { intlFormat } from 'date-fns';
 import { VideoElement } from '../video/VideoElement.tsx';
+import { BookmarkButton } from '../bookmark/BookmarkButton.tsx';
+import { extractTitle } from '../extractTitle.ts';
 
 type VideoCardProperties = { video: LastVideo; onVideoClick: () => void };
 const VideoCard = ({ video, onVideoClick }: VideoCardProperties) => {
+  const bookmarks = useBookmarks();
+
+  const onBookmarkClick = useCallback((title: string, video: Video) => {
+    if (bookmarks.isVideoBookmarked(video)) {
+      bookmarks.remove({
+        className: title,
+        video,
+      });
+    } else {
+      bookmarks.add({
+        className: title,
+        video,
+      });
+    }
+  }, []);
+
   return (
     <article
       className={`rounded-md border border-slate-900 shadow-lg transition delay-300 duration-300`}
     >
       <div className="group relative">
         <div className="mt-3 grid grid-cols-2">
-          <h3 className="col-span-2 content-evenly pl-2 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-            {video.title}
-          </h3>
+          <div className="col-span-2 flex">
+            <h3 className="grow content-evenly pl-2 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+              {video.title}
+            </h3>
+            <div className="mr-1 flex-none content-center text-end">
+              {video ? (
+                <BookmarkButton
+                  onBookmarkClick={() =>
+                    onBookmarkClick(extractTitle(video.title), {title: video.title, image: video.image, id: video.videoId })
+                  }
+                  bookmarked={bookmarks.isVideoBookmarked({title: video.title, image: video.image, id: video.videoId })}
+                />
+              ) : (
+                <></>
+              )}
+            </div>
+          </div>
           <h4 className="col-span-2 pl-2 text-sm text-gray-500">
             Published {intlFormat(video.publishTime)}
           </h4>
@@ -105,6 +137,7 @@ export const LastVideos = () => {
       );
     }
   );
+
   return (
     <>
       <VideoCards
