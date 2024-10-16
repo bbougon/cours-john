@@ -1,3 +1,5 @@
+[build]
+    base = "cours-john-ui/"
 [[headers]]
   for = "/*"
   [headers.values]
