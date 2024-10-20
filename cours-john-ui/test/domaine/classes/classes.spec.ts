@@ -44,7 +44,9 @@ describe('Generate guitar classes', () => {
         videos: [
           { title: videoDTO1.title, id: videoDTO1.id, image: videoDTO1.image },
           { title: videoDTO2.title, id: videoDTO2.id, image: videoDTO2.image },
-        ],
+        ].sort((a, b) =>
+          a.title.toLowerCase() > b.title.toLowerCase() ? 0 : -1
+        ),
       },
     ]);
   });
@@ -105,5 +107,41 @@ describe('Generate guitar classes', () => {
     expect(ericClaptonClasses).toStrictEqual<GuitarClass[]>(
       expectedEriClaptonClasses
     );
+  });
+
+  it('Sorts classes by alphabetical order', () => {
+    const videoDTOBuilder = aVideoDTOBuilder();
+    const videoDTO1 = videoDTOBuilder.havingTitle('Solo black ice').build();
+    const videoDTO2 = videoDTOBuilder.havingTitle('Intro black ice').build();
+    const videoDTO3 = videoDTOBuilder.havingTitle('Pont Back in Black').build();
+    const videoDTO4 = videoDTOBuilder
+      .havingTitle('Intro Back in black')
+      .build();
+
+    const guitareClasses = generateGuitarClasses([
+      videoDTO1,
+      videoDTO2,
+      videoDTO3,
+      videoDTO4,
+    ]);
+
+    expect(guitareClasses).toStrictEqual<GuitarClass[]>([
+      {
+        title: 'Back in black',
+        classId: videoDTO4.classId,
+        videos: [
+          { title: videoDTO4.title, id: videoDTO4.id, image: videoDTO4.image },
+          { title: videoDTO3.title, id: videoDTO3.id, image: videoDTO3.image },
+        ],
+      },
+      {
+        title: 'Black ice',
+        classId: videoDTO2.classId,
+        videos: [
+          { title: videoDTO2.title, id: videoDTO2.id, image: videoDTO2.image },
+          { title: videoDTO1.title, id: videoDTO1.id, image: videoDTO1.image },
+        ],
+      },
+    ]);
   });
 });

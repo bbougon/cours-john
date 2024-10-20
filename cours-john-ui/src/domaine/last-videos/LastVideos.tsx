@@ -45,9 +45,17 @@ const VideoCard = ({ video, onVideoClick }: VideoCardProperties) => {
               {video ? (
                 <BookmarkButton
                   onBookmarkClick={() =>
-                    onBookmarkClick(extractTitle(video.title), {title: video.title, image: video.image, id: video.videoId })
+                    onBookmarkClick(extractTitle(video.title), {
+                      title: video.title,
+                      image: video.image,
+                      id: video.videoId,
+                    })
                   }
-                  bookmarked={bookmarks.isVideoBookmarked({title: video.title, image: video.image, id: video.videoId })}
+                  bookmarked={bookmarks.isVideoBookmarked({
+                    title: video.title,
+                    image: video.image,
+                    id: video.videoId,
+                  })}
                 />
               ) : (
                 <></>

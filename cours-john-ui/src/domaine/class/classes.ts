@@ -31,15 +31,17 @@ export const generateGuitarClasses = (videoDTOS: VideoDTO[]): GuitarClass[] => {
   videoDTOS.forEach((video) =>
     songsTitle.get(extractTitle(video.title))?.push(video)
   );
-  return Object.entries(Object.fromEntries(songsTitle)).map(
-    ([title, videos]) => {
+  return Object.entries(Object.fromEntries(songsTitle))
+    .map(([title, videos]) => {
       return {
         title: `${title[0].toUpperCase()}${title.slice(1)}`,
         classId: videos[0].classId,
-        videos: videos.map(
-          ({ classId, ...otherAttributes }) => otherAttributes
-        ),
+        videos: videos
+          .map(({ classId, ...otherAttributes }) => otherAttributes)
+          .sort((a, b) =>
+            a.title.toLowerCase() > b.title.toLowerCase() ? 0 : -1
+          ),
       };
-    }
-  );
+    })
+    .sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase() ? 0 : -1));
 };

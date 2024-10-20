@@ -21,7 +21,7 @@
     "build": "npm run build --workspaces",
     "start": "npm run start -w cours-john-ui",
     "format:check": "npm run format:check --workspaces",
-    "format:fix": "npm format:fix --workspaces"
+    "format:fix": "npm run format:fix --workspaces"
   },
   "dependencies": {
   },

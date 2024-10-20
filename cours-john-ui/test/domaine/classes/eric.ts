@@ -2,17 +2,6 @@ import { GuitarClass, VideoDTO } from '../../../src/domaine/class/classes';
 
 export const expectedEriClaptonClasses: GuitarClass[] = [
   {
-    title: 'Have you ever loved a woman',
-    classId: 'a',
-    videos: [
-      {
-        title: 'Intro Have You Ever Loved A Woman',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS4yODlGNEE0NkRGMEEzMEQy',
-        image: 'image',
-      },
-    ],
-  },
-  {
     title: 'Cocaine',
     classId: 'b',
     videos: [
@@ -22,13 +11,24 @@ export const expectedEriClaptonClasses: GuitarClass[] = [
         image: 'image',
       },
       {
+        title: 'Pont ralenti Cocaine',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS41MjE1MkI0OTQ2QzJGNzNG',
+        image: 'image',
+      },
+      {
         title: 'Riff + pont Cocaine',
         id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS41NkI0NEY2RDEwNTU3Q0M2',
         image: 'image',
       },
+    ],
+  },
+  {
+    title: 'Crossroads',
+    classId: 'd',
+    videos: [
       {
-        title: 'Pont ralenti Cocaine',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS41MjE1MkI0OTQ2QzJGNzNG',
+        title: 'PART 2 SOLO 2 CROSSROADS',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS4zQzFBN0RGNzNFREFCMjBE',
         image: 'image',
       },
     ],
@@ -38,8 +38,33 @@ export const expectedEriClaptonClasses: GuitarClass[] = [
     classId: 'c',
     videos: [
       {
+        title: '1er outro Crossroads Live',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS40NzZCMERDMjVEN0RFRThB',
+        image: 'image',
+      },
+      {
+        title: 'Fin outro Crossroads Live',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS5EMEEwRUY5M0RDRTU3NDJC',
+        image: 'image',
+      },
+      {
         title: 'Intro Riff Crossroads Live',
         id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS4wOTA3OTZBNzVEMTUzOTMy',
+        image: 'image',
+      },
+      {
+        title: 'licks bloc 5 Crossroads Live',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS45NDk1REZENzhEMzU5MDQz',
+        image: 'image',
+      },
+      {
+        title: 'PART 3 CROSSROADS LIVE',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS5DRUQwODMxQzUyRTlGRkY3',
+        image: 'image',
+      },
+      {
+        title: 'PART 4 CROSSROADS LIVE',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS5DNkMwRUI2MkI4QkI4NDFG',
         image: 'image',
       },
       {
@@ -48,8 +73,8 @@ export const expectedEriClaptonClasses: GuitarClass[] = [
         image: 'image',
       },
       {
-        title: 'Solo Part I Crossroads Live',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS4zMDg5MkQ5MEVDMEM1NTg2',
+        title: 'SOLO COUPLET CROSSROADS LIVE',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS45NkVENTkxRDdCQUFBMDY4',
         image: 'image',
       },
       {
@@ -73,44 +98,19 @@ export const expectedEriClaptonClasses: GuitarClass[] = [
         image: 'image',
       },
       {
-        title: 'licks bloc 5 Crossroads Live',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS45NDk1REZENzhEMzU5MDQz',
-        image: 'image',
-      },
-      {
-        title: '1er outro Crossroads Live',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS40NzZCMERDMjVEN0RFRThB',
-        image: 'image',
-      },
-      {
-        title: 'Fin outro Crossroads Live',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS5EMEEwRUY5M0RDRTU3NDJC',
-        image: 'image',
-      },
-      {
-        title: 'SOLO COUPLET CROSSROADS LIVE',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS45NkVENTkxRDdCQUFBMDY4',
-        image: 'image',
-      },
-      {
-        title: 'PART 3 CROSSROADS LIVE',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS5DRUQwODMxQzUyRTlGRkY3',
-        image: 'image',
-      },
-      {
-        title: 'PART 4 CROSSROADS LIVE',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS5DNkMwRUI2MkI4QkI4NDFG',
+        title: 'Solo Part I Crossroads Live',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS4zMDg5MkQ5MEVDMEM1NTg2',
         image: 'image',
       },
     ],
   },
   {
-    title: 'Crossroads',
-    classId: 'd',
+    title: 'Have you ever loved a woman',
+    classId: 'a',
     videos: [
       {
-        title: 'PART 2 SOLO 2 CROSSROADS',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS4zQzFBN0RGNzNFREFCMjBE',
+        title: 'Intro Have You Ever Loved A Woman',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS4yODlGNEE0NkRGMEEzMEQy',
         image: 'image',
       },
     ],
@@ -120,13 +120,13 @@ export const expectedEriClaptonClasses: GuitarClass[] = [
     classId: 'e',
     videos: [
       {
-        title: 'Rythmique 1 I Shot The Sherif Live',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS41Mzk2QTAxMTkzNDk4MDhF',
+        title: 'Exemple de solo I Shot The Sherif Live',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS5EQUE1NTFDRjcwMDg0NEMz',
         image: 'image',
       },
       {
-        title: 'Rythmique etche I Shot The Sherif Live',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS4yMUQyQTQzMjRDNzMyQTMy',
+        title: 'Rythmique 1 I Shot The Sherif Live',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS41Mzk2QTAxMTkzNDk4MDhF',
         image: 'image',
       },
       {
@@ -135,13 +135,8 @@ export const expectedEriClaptonClasses: GuitarClass[] = [
         image: 'image',
       },
       {
-        title: 'Thème I Shot The Sherif Live',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS5ENDU4Q0M4RDExNzM1Mjcy',
-        image: 'image',
-      },
-      {
-        title: 'Structure I Shot The Sherif Live',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS5DMkU4NTY1QUFGQTYwMDE3',
+        title: 'Rythmique etche I Shot The Sherif Live',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS4yMUQyQTQzMjRDNzMyQTMy',
         image: 'image',
       },
       {
@@ -155,39 +150,13 @@ export const expectedEriClaptonClasses: GuitarClass[] = [
         image: 'image',
       },
       {
-        title: 'Exemple de solo I Shot The Sherif Live',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS5EQUE1NTFDRjcwMDg0NEMz',
-        image: 'image',
-      },
-    ],
-  },
-  {
-    title: 'Layla unplugged',
-    classId: 'f',
-    videos: [
-      {
-        title: 'Intro Layla Unplugged',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS5GM0Q3M0MzMzY5NTJFNTdE',
+        title: 'Structure I Shot The Sherif Live',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS5DMkU4NTY1QUFGQTYwMDE3',
         image: 'image',
       },
       {
-        title: 'Rythmique Layla Unplugged',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS41QTY1Q0UxMTVCODczNThE',
-        image: 'image',
-      },
-      {
-        title: 'Solo acoustique Layla Unplugged',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS45NzUwQkI1M0UxNThBMkU0',
-        image: 'image',
-      },
-      {
-        title: '2ème solo acoustique Layla Unplugged',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS4yMDhBMkNBNjRDMjQxQTg1',
-        image: 'image',
-      },
-      {
-        title: '2ème solo fin Layla Unplugged',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS5DQ0MyQ0Y4Mzg0M0VGOEYw',
+        title: 'Thème I Shot The Sherif Live',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS5ENDU4Q0M4RDExNzM1Mjcy',
         image: 'image',
       },
     ],
@@ -204,6 +173,37 @@ export const expectedEriClaptonClasses: GuitarClass[] = [
       {
         title: 'Électrique partie 2 Layla',
         id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS4zRjM0MkVCRTg0MkYyQTM0',
+        image: 'image',
+      },
+    ],
+  },
+  {
+    title: 'Layla unplugged',
+    classId: 'f',
+    videos: [
+      {
+        title: '2ème solo acoustique Layla Unplugged',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS4yMDhBMkNBNjRDMjQxQTg1',
+        image: 'image',
+      },
+      {
+        title: '2ème solo fin Layla Unplugged',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS5DQ0MyQ0Y4Mzg0M0VGOEYw',
+        image: 'image',
+      },
+      {
+        title: 'Intro Layla Unplugged',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS5GM0Q3M0MzMzY5NTJFNTdE',
+        image: 'image',
+      },
+      {
+        title: 'Rythmique Layla Unplugged',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS41QTY1Q0UxMTVCODczNThE',
+        image: 'image',
+      },
+      {
+        title: 'Solo acoustique Layla Unplugged',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS45NzUwQkI1M0UxNThBMkU0',
         image: 'image',
       },
     ],
@@ -233,13 +233,13 @@ export const expectedEriClaptonClasses: GuitarClass[] = [
         image: 'image',
       },
       {
-        title: '5ème partie Malted Milk',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS4zRDBDOEZDOUM0MDY5NEEz',
+        title: '4ème solo Malted Milk',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS42MTI4Njc2QjM1RjU1MjlG',
         image: 'image',
       },
       {
-        title: '4ème solo Malted Milk',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS42MTI4Njc2QjM1RjU1MjlG',
+        title: '5ème partie Malted Milk',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS4zRDBDOEZDOUM0MDY5NEEz',
         image: 'image',
       },
     ],
@@ -249,18 +249,13 @@ export const expectedEriClaptonClasses: GuitarClass[] = [
     classId: 'i',
     videos: [
       {
-        title: 'Intro Tears In Heaven',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS5GNDg1Njc1QzZERjlFRjE5',
-        image: 'image',
-      },
-      {
         title: 'Explications intro Tears In Heaven',
         id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS43NDhFRTgwOTRERTU4Rjg3',
         image: 'image',
       },
       {
-        title: 'Variantes Tears In Heaven',
-        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS44Mjc5REFBRUE2MTdFRDU0',
+        title: 'Intro Tears In Heaven',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS5GNDg1Njc1QzZERjlFRjE5',
         image: 'image',
       },
       {
@@ -271,6 +266,11 @@ export const expectedEriClaptonClasses: GuitarClass[] = [
       {
         title: 'Modulations Tears In Heaven',
         id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS45RjNFMDhGQ0Q2RkFCQTc1',
+        image: 'image',
+      },
+      {
+        title: 'Variantes Tears In Heaven',
+        id: 'UEwtbVVNbmNIclMwa2RtdF9pVlpTQTg3OW1ndVNxbzZtNS44Mjc5REFBRUE2MTdFRDU0',
         image: 'image',
       },
     ],
