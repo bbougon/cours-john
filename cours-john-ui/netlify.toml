@@ -1,3 +1,5 @@
+[build]
+    publish = "cours-john-ui/dist"
 [[headers]]
   for = "/*"
   [headers.values]
