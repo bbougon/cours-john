@@ -29,7 +29,7 @@ export const Sidebar = () => {
         data-drawer-toggle="default-sidebar"
         aria-controls="default-sidebar"
         type="button"
-        className="mt-2 inline-flex items-center rounded-lg bg-white text-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 lg:hidden"
+        className="mt-2 inline-flex items-center rounded-lg bg-white text-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 xl:hidden"
         onClick={showSidebar}
       >
         <span className="sr-only">Open sidebar</span>
@@ -50,17 +50,17 @@ export const Sidebar = () => {
 
       <aside
         id="default-sidebar"
-        className={`${translation} fixed left-0 top-0 z-40 h-screen w-64 transition-transform lg:translate-x-0`}
+        className={`${translation} fixed left-0 top-0 z-40 h-screen w-64 transition-transform xl:translate-x-0`}
         aria-label="Sidebar"
       >
         <div className="h-full overflow-y-auto bg-gray-50 px-3 py-4 dark:bg-gray-800">
-          <div className="mt-2 flex place-content-end text-gray-500 lg:hidden">
+          <div className="mt-2 flex place-content-end text-gray-500 xl:hidden">
             <button
               data-drawer-target="default-sidebar"
               data-drawer-toggle="default-sidebar"
               aria-controls="default-sidebar"
               type="button"
-              className="inline-flex items-center rounded-lg border border-gray-300 px-1 py-1 text-sm hover:border-gray-500 focus:outline-none lg:hidden"
+              className="inline-flex items-center rounded-lg border border-gray-300 px-1 py-1 text-sm hover:border-gray-500 focus:outline-none xl:hidden"
               onClick={hideSidebar}
             >
               <span className="mr-2">Close</span>
